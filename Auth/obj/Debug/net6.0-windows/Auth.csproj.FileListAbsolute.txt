@@ -54,3 +54,4 @@ E:\ProjectsForGithub\csharp-sqlclient\Auth\bin\Debug\net6.0-windows\runtimes\win
 E:\ProjectsForGithub\csharp-sqlclient\Auth\obj\Debug\net6.0-windows\Auth.csproj.CopyComplete
 E:\ProjectsForGithub\csharp-sqlclient\Auth\obj\Debug\net6.0-windows\Auth.Controlls.HomePage.resources
 E:\ProjectsForGithub\csharp-sqlclient\Auth\obj\Debug\net6.0-windows\Auth.Controls.ProfesorDetailsPage.resources
+E:\ProjectsForGithub\csharp-sqlclient\Auth\obj\Debug\net6.0-windows\Auth.sourcelink.json

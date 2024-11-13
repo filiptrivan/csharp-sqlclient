@@ -5,11 +5,17 @@ VisualStudioVersion = 17.8.34525.116
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WindowsForms.SmallProjects", "WindowsForms.SmallProjects", "{445EB774-8878-4F43-8621-DC1CF6C8EC7E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auth", "Auth\Auth.csproj", "{02937325-2743-4FDD-AE3C-A1BB2DE66841}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Auth", "Auth\Auth.csproj", "{02937325-2743-4FDD-AE3C-A1BB2DE66841}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Generators", "Generators", "{D4005A7B-8170-4D6C-9794-253BACB203AC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharp.SqlClient.SourceGenerators", "CSharp.SqlClient.SourceGenerators\CSharp.SqlClient.SourceGenerators.csproj", "{1E03CD1F-05B4-4836-967D-8DE24018D424}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSharp.SqlClient.SourceGenerators", "CSharp.SqlClient.SourceGenerators\CSharp.SqlClient.SourceGenerators.csproj", "{1E03CD1F-05B4-4836-967D-8DE24018D424}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "24_11_2019", "24_11_2019\24_11_2019.csproj", "{8FDCE379-37B5-4A4E-9DBC-5D9AD54DC825}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domaci2023", "Domaci2023\Domaci2023.csproj", "{0F236435-926E-49EA-BC3F-F2E5925C1091}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kolokvijum2023Termin1", "Kolokvijum2023Termin1\Kolokvijum2023Termin1.csproj", "{2DA08D54-874D-4A11-AE51-A9948AFD9837}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,6 +31,18 @@ Global
 		{1E03CD1F-05B4-4836-967D-8DE24018D424}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1E03CD1F-05B4-4836-967D-8DE24018D424}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1E03CD1F-05B4-4836-967D-8DE24018D424}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8FDCE379-37B5-4A4E-9DBC-5D9AD54DC825}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FDCE379-37B5-4A4E-9DBC-5D9AD54DC825}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FDCE379-37B5-4A4E-9DBC-5D9AD54DC825}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FDCE379-37B5-4A4E-9DBC-5D9AD54DC825}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F236435-926E-49EA-BC3F-F2E5925C1091}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F236435-926E-49EA-BC3F-F2E5925C1091}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F236435-926E-49EA-BC3F-F2E5925C1091}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F236435-926E-49EA-BC3F-F2E5925C1091}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2DA08D54-874D-4A11-AE51-A9948AFD9837}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DA08D54-874D-4A11-AE51-A9948AFD9837}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DA08D54-874D-4A11-AE51-A9948AFD9837}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DA08D54-874D-4A11-AE51-A9948AFD9837}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -32,6 +50,9 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{02937325-2743-4FDD-AE3C-A1BB2DE66841} = {445EB774-8878-4F43-8621-DC1CF6C8EC7E}
 		{1E03CD1F-05B4-4836-967D-8DE24018D424} = {D4005A7B-8170-4D6C-9794-253BACB203AC}
+		{8FDCE379-37B5-4A4E-9DBC-5D9AD54DC825} = {445EB774-8878-4F43-8621-DC1CF6C8EC7E}
+		{0F236435-926E-49EA-BC3F-F2E5925C1091} = {445EB774-8878-4F43-8621-DC1CF6C8EC7E}
+		{2DA08D54-874D-4A11-AE51-A9948AFD9837} = {445EB774-8878-4F43-8621-DC1CF6C8EC7E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FE02E5D3-1FBD-4972-B549-B32BBC5CBFE0}
