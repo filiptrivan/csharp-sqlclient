@@ -9,12 +9,7 @@ namespace Kolokvijum2023Termin1
 {
     public class Broker
     {
-        SqlConnection _connection;
-
-        public Broker()
-        {
-            _connection = new SqlConnection(Settings.ConnectionString);
-        }
+        SqlConnection _connection = new SqlConnection(@"Data Source=DESKTOP-LRUAM92\SQLEXPRESS;Initial Catalog=termin_1;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False");
 
         public long InsertPredmet(Predmet predmet)
         {
@@ -76,15 +71,13 @@ namespace Kolokvijum2023Termin1
 
                 while (reader.Read())
                 {
-                    Predmet obj = new Predmet
+                    result.Add(new Predmet
                     {
                         Id = reader.GetInt64(0),
                         Naziv = reader.GetString(1),
                         ESPB = reader.GetInt32(2),
                         KatedraId = reader.GetInt64(3),
-                    };
-
-                    result.Add(obj);
+                    });
                 }
 
                 _connection.Close();

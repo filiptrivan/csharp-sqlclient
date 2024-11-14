@@ -1,4 +1,4 @@
-﻿namespace Kolokvijum2023Termin1
+﻿namespace Kolokvijum2023Termin2
 {
     partial class Form1
     {
@@ -29,49 +29,47 @@
         private void InitializeComponent()
         {
             menuStrip1 = new MenuStrip();
-            zadatak1ToolStripMenuItem = new ToolStripMenuItem();
-            zadatak2ToolStripMenuItem = new ToolStripMenuItem();
+            listaToolStripMenuItem = new ToolStripMenuItem();
+            detaljiToolStripMenuItem = new ToolStripMenuItem();
             panel1 = new Panel();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // menuStrip1
             // 
-            menuStrip1.Items.AddRange(new ToolStripItem[] { zadatak1ToolStripMenuItem, zadatak2ToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { listaToolStripMenuItem, detaljiToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(800, 24);
+            menuStrip1.Size = new Size(1028, 24);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
-            // zadatak1ToolStripMenuItem
+            // listaToolStripMenuItem
             // 
-            zadatak1ToolStripMenuItem.Name = "zadatak1ToolStripMenuItem";
-            zadatak1ToolStripMenuItem.Size = new Size(70, 20);
-            zadatak1ToolStripMenuItem.Text = "Zadatak 1";
-            zadatak1ToolStripMenuItem.Click += zadatak1ToolStripMenuItem_Click;
+            listaToolStripMenuItem.Name = "listaToolStripMenuItem";
+            listaToolStripMenuItem.Size = new Size(43, 20);
+            listaToolStripMenuItem.Text = "Lista";
+            listaToolStripMenuItem.Click += listaToolStripMenuItem_Click;
             // 
-            // zadatak2ToolStripMenuItem
+            // detaljiToolStripMenuItem
             // 
-            zadatak2ToolStripMenuItem.Name = "zadatak2ToolStripMenuItem";
-            zadatak2ToolStripMenuItem.Size = new Size(70, 20);
-            zadatak2ToolStripMenuItem.Text = "Zadatak 2";
-            zadatak2ToolStripMenuItem.Click += zadatak2ToolStripMenuItem_Click;
+            detaljiToolStripMenuItem.Name = "detaljiToolStripMenuItem";
+            detaljiToolStripMenuItem.Size = new Size(52, 20);
+            detaljiToolStripMenuItem.Text = "Detalji";
+            detaljiToolStripMenuItem.Click += detaljiToolStripMenuItem_Click;
             // 
             // panel1
             // 
-            panel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            panel1.BackColor = SystemColors.Control;
             panel1.Location = new Point(12, 27);
             panel1.Name = "panel1";
-            panel1.Size = new Size(776, 411);
+            panel1.Size = new Size(1004, 657);
             panel1.TabIndex = 1;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(1028, 696);
             Controls.Add(panel1);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
@@ -86,8 +84,8 @@
         #endregion
 
         private MenuStrip menuStrip1;
-        private ToolStripMenuItem zadatak1ToolStripMenuItem;
-        private ToolStripMenuItem zadatak2ToolStripMenuItem;
+        private ToolStripMenuItem listaToolStripMenuItem;
+        private ToolStripMenuItem detaljiToolStripMenuItem;
         private Panel panel1;
     }
 }

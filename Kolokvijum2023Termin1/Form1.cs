@@ -19,7 +19,7 @@ namespace Kolokvijum2023Termin1
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"{ex.Message}\n{ex.InnerException}\n{ex.StackTrace}");
+                MessageBox.Show(ex.ToString());
             }
         }
 
@@ -33,7 +33,7 @@ namespace Kolokvijum2023Termin1
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"{ex.Message}\n{ex.InnerException}\n{ex.StackTrace}");
+                MessageBox.Show(ex.ToString());
             }
         }
     }
