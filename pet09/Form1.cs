@@ -9,14 +9,14 @@ namespace pet09
         {
             InitializeComponent();
 
-            comboBox1.DataSource = broker.GetosobaList();
-            comboBox1.DisplayMember = "ime";
-            comboBox1.ValueMember = "jmbg";
+            comboBox1.DataSource = broker.GetOsobaList();
+            comboBox1.DisplayMember = "Ime";
+            comboBox1.ValueMember = "JMBG";
             comboBox1.SelectedIndex = -1;
 
-            comboBox2.DataSource = broker.GetinstrumentList();
-            comboBox2.DisplayMember = "naziv";
-            comboBox2.ValueMember = "id";
+            comboBox2.DataSource = broker.GetInstrumentList();
+            comboBox2.DisplayMember = "Naziv";
+            comboBox2.ValueMember = "Id";
             comboBox2.SelectedIndex = -1;
 
             label1.Text = "0";
@@ -28,8 +28,8 @@ namespace pet09
         {
             if (first == 1)
             {
-                List<long> instrumentids = broker.GetosobainstrumentIdsForosoba((string)comboBox1.SelectedValue).Select(x => x.instrumentid).ToList();
-                dataGridView1.DataSource = broker.GetinstrumentList(instrumentids);
+                List<long> instrumentids = broker.GetOsobaInstrumentIdsForOsoba((string)comboBox1.SelectedValue).Select(x => x.InstrumentId).ToList();
+                dataGridView1.DataSource = broker.GetInstrumentList(instrumentids);
                 label1.Text = instrumentids.Count.ToString();
             }
         }
@@ -43,7 +43,7 @@ namespace pet09
         {
             if (first == 1)
             {
-                List<long> instrumentids = broker.GetosobainstrumentIdsForosoba((string)comboBox1.SelectedValue).Select(x => x.instrumentid).ToList();
+                List<long> instrumentids = broker.GetOsobaInstrumentIdsForOsoba((string)comboBox1.SelectedValue).Select(x => x.InstrumentId).ToList();
                 if (instrumentids.Contains((long)comboBox2.SelectedValue))
                 {
                     checkBox1.Checked = true;

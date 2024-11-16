@@ -9,17 +9,17 @@ namespace pet09
 {
     public class Broker
     {
-        SqlConnection conn = new SqlConnection(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=0000_ProSoft;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False");
+        SqlConnection _conn = new SqlConnection(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=0000_ProSoft;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False");
 
-        public List<osoba> GetosobaList()
+        public List<Osoba> GetOsobaList()
         {
             try
             {
-                List<osoba> result = new List<osoba>();
+                List<Osoba> result = new List<Osoba>();
 
-                conn.Open();
+                _conn.Open();
 
-                SqlCommand cmd = conn.CreateCommand();
+                SqlCommand cmd = _conn.CreateCommand();
 
                 cmd.CommandText = $"select * from osoba;";
 
@@ -27,34 +27,34 @@ namespace pet09
 
                 while (reader.Read())
                 {
-                    result.Add(new osoba
+                    result.Add(new Osoba
                     {
-                        jmbg = reader.GetString(0),
-                        ime = reader.GetString(1),
-                        prezime = reader.GetString(2),
+                        JMBG = reader.GetString(0),
+                        Ime = reader.GetString(1),
+                        Prezime = reader.GetString(2),
                     });
                 }
 
-                conn.Close();
+                _conn.Close();
 
                 return result;
             }
             catch (Exception)
             {
-                conn?.Close();
+                _conn?.Close();
                 throw;
             }
         }
 
-        public List<instrument> GetinstrumentList()
+        public List<Instrument> GetInstrumentList()
         {
             try
             {
-                List<instrument> result = new List<instrument>();
+                List<Instrument> result = new List<Instrument>();
 
-                conn.Open();
+                _conn.Open();
 
-                SqlCommand cmd = conn.CreateCommand();
+                SqlCommand cmd = _conn.CreateCommand();
 
                 cmd.CommandText = $"select * from instrument;";
 
@@ -62,38 +62,38 @@ namespace pet09
 
                 while (reader.Read())
                 {
-                    result.Add(new instrument
+                    result.Add(new Instrument
                     {
-                        id = reader.GetInt64(0),
-                        naziv = reader.GetString(1),
+                        Id = reader.GetInt64(0),
+                        Naziv = reader.GetString(1),
                     });
                 }
 
-                conn.Close();
+                _conn.Close();
 
                 return result;
             }
             catch (Exception)
             {
-                conn?.Close();
+                _conn?.Close();
                 throw;
             }
         }
 
-        public List<instrument> GetinstrumentList(List<long> instrumentids)
+        public List<Instrument> GetInstrumentList(List<long> instrumentids)
         {
             try
             {
-                List<instrument> result = new List<instrument>();
+                List<Instrument> result = new List<Instrument>();
 
                 if (instrumentids == null || instrumentids.Count == 0)
                 {
                     return result;
                 }
 
-                conn.Open();
+                _conn.Open();
 
-                SqlCommand cmd = conn.CreateCommand();
+                SqlCommand cmd = _conn.CreateCommand();
 
                 cmd.CommandText = $"select * from instrument where id in ({string.Join(", ", instrumentids)});";
 
@@ -101,111 +101,111 @@ namespace pet09
 
                 while (reader.Read())
                 {
-                    result.Add(new instrument
+                    result.Add(new Instrument
                     {
-                        id = reader.GetInt64(0),
-                        naziv = reader.GetString(1),
+                        Id = reader.GetInt64(0),
+                        Naziv = reader.GetString(1),
                     });
                 }
 
-                conn.Close();
+                _conn.Close();
 
                 return result;
             }
             catch (Exception)
             {
-                conn?.Close();
+                _conn?.Close();
                 throw;
             }
         }
 
-        public List<osoba> GetosobaList(List<string> osobajmbgs)
+        public List<Osoba> GetOsobaList(List<string> osobaJMBGs)
         {
             try
             {
-                List<osoba> result = new List<osoba>();
+                List<Osoba> result = new List<Osoba>();
 
-                if (osobajmbgs == null || osobajmbgs.Count == 0)
+                if (osobaJMBGs == null || osobaJMBGs.Count == 0)
                 {
                     return result;
                 }
 
-                conn.Open();
+                _conn.Open();
 
-                SqlCommand cmd = conn.CreateCommand();
+                SqlCommand cmd = _conn.CreateCommand();
 
-                cmd.CommandText = $"select * from osoba where jmbg in ({string.Join(", ", osobajmbgs.Select(x => $"N'{x}'"))});";
+                cmd.CommandText = $"select * from osoba where JMBG in ({string.Join(", ", osobaJMBGs.Select(x => $"N'{x}'"))});";
 
                 SqlDataReader reader = cmd.ExecuteReader();
 
                 while (reader.Read())
                 {
-                    result.Add(new osoba
+                    result.Add(new Osoba
                     {
-                        jmbg = reader.GetString(0),
-                        ime = reader.GetString(1),
-                        prezime = reader.GetString(2),
+                        JMBG = reader.GetString(0),
+                        Ime = reader.GetString(1),
+                        Prezime = reader.GetString(2),
                     });
                 }
 
-                conn.Close();
+                _conn.Close();
 
                 return result;
             }
             catch (Exception)
             {
-                conn?.Close();
+                _conn?.Close();
                 throw;
             }
         }
 
-        public List<osobainstrument> GetosobainstrumentIdsForosoba(string osobajmbg)
+        public List<OsobaInstrument> GetOsobaInstrumentIdsForOsoba(string osobaJMBG)
         {
             try
             {
-                List<osobainstrument> result = new List<osobainstrument>();
+                List<OsobaInstrument> result = new List<OsobaInstrument>();
 
-                if (osobajmbg == null)
+                if (osobaJMBG == null)
                 {
                     return result;
                 }
 
-                conn.Open();
+                _conn.Open();
 
-                SqlCommand cmd = conn.CreateCommand();
+                SqlCommand cmd = _conn.CreateCommand();
 
-                cmd.CommandText = $"select * from osobainstrument where jmbg = N'{osobajmbg}';";
+                cmd.CommandText = $"select * from osobainstrument where JMBG = N'{osobaJMBG}';";
 
                 SqlDataReader reader = cmd.ExecuteReader();
 
                 while (reader.Read())
                 {
-                    result.Add(new osobainstrument{
-                       jmbg = reader.GetString(reader.GetOrdinal("jmbg")),
-                       instrumentid = reader.GetInt64(reader.GetOrdinal("instrumentid")),
+                    result.Add(new OsobaInstrument{
+                       JMBG = reader.GetString(reader.GetOrdinal("JMBG")),
+                       InstrumentId = reader.GetInt64(reader.GetOrdinal("instrumentid")),
                     });
                 }
 
-                conn.Close();
+                _conn.Close();
 
                 return result;
             }
             catch (Exception)
             {
-                conn?.Close();
+                _conn?.Close();
                 throw;
             }
         }
 
-        public List<osobainstrument> GetosobainstrumentForinstrument(long instrumentid)
+        public List<OsobaInstrument> GetOsobaInstrumentForinstrument(long instrumentid)
         {
             try
             {
-                List<osobainstrument> result = new List<osobainstrument>();
+                List<OsobaInstrument> result = new List<OsobaInstrument>();
 
-                conn.Open();
+                _conn.Open();
 
-                SqlCommand cmd = conn.CreateCommand();
+                SqlCommand cmd = _conn.CreateCommand();
 
                 cmd.CommandText = $"select * from osobainstrument where instrumentid = {instrumentid};";
 
@@ -213,64 +213,64 @@ namespace pet09
 
                 while (reader.Read())
                 {
-                    result.Add(new osobainstrument
+                    result.Add(new OsobaInstrument
                     {
-                        jmbg = reader.GetString(reader.GetOrdinal("jmbg")),
-                        instrumentid = reader.GetInt64(reader.GetOrdinal("instrumentid")),
+                        JMBG = reader.GetString(reader.GetOrdinal("JMBG")),
+                        InstrumentId = reader.GetInt64(reader.GetOrdinal("instrumentid")),
                     });
                 }
 
-                conn.Close();
+                _conn.Close();
 
                 return result;
             }
             catch (Exception)
             {
-                conn?.Close();
+                _conn?.Close();
                 throw;
             }
         }
 
-        public void Deleteosoba(string osobajmbg)
+        public void DeleteOsoba(string osobaJMBG)
         {
             try
             {
-                conn.Open();
+                _conn.Open();
 
-                SqlCommand cmd = conn.CreateCommand();
+                SqlCommand cmd = _conn.CreateCommand();
 
-                cmd.CommandText = $"delete osobainstrument where jmbg = N'{osobajmbg}';";
+                cmd.CommandText = $"delete osobainstrument where JMBG = N'{osobaJMBG}';";
 
                 cmd.ExecuteNonQuery();
 
-                conn.Close();
+                _conn.Close();
             }
             catch (Exception)
             {
-                conn?.Close();
+                _conn?.Close();
                 throw;
             }
         }
     }
 
-    public class osoba 
+    public class Osoba 
     {
-        public string jmbg {get; set;}
-        public string ime {get; set;}
-        public string prezime { get; set; }
+        public string JMBG {get; set;}
+        public string Ime {get; set;}
+        public string Prezime { get; set; }
 
     }
 
-    public class instrument
+    public class Instrument
     {
-        public long id { get; set;}
-        public string naziv { get; set;}
+        public long Id { get; set;}
+        public string Naziv { get; set;}
 
     }
 
-    public class osobainstrument
+    public class OsobaInstrument
     {
-        public string jmbg { get; set; }
-        public long instrumentid { get; set; }
+        public string JMBG { get; set; }
+        public long InstrumentId { get; set; }
     }
 }

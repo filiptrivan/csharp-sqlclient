@@ -13,23 +13,23 @@ namespace pet09
 {
     public partial class DeleteOsoba : Form
     {
-        Broker broker = new Broker();
-        long ci = 0;
+        Broker _broker = new Broker();
+        long currentInstrumentId = 0;
 
         public DeleteOsoba(long instrumentid)
         {
             InitializeComponent();
 
-            ci = instrumentid;
+            currentInstrumentId = instrumentid;
 
             LoadTable();
         }
 
         private void LoadTable()
         {
-            List<string> jmbgList = broker.GetosobainstrumentForinstrument(ci).Select(x => x.jmbg).ToList();
+            List<string> jmbgList = _broker.GetOsobaInstrumentForinstrument(currentInstrumentId).Select(x => x.JMBG).ToList();
 
-            dataGridView1.DataSource = broker.GetosobaList(jmbgList);
+            dataGridView1.DataSource = _broker.GetOsobaList(jmbgList);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -38,8 +38,8 @@ namespace pet09
 
             foreach (DataGridViewRow row in selectedList)
             {
-                osoba o = (osoba)row.DataBoundItem;
-                broker.Deleteosoba(o.jmbg);
+                Osoba osoba = (Osoba)row.DataBoundItem;
+                _broker.DeleteOsoba(osoba.JMBG);
             }
 
             LoadTable();
