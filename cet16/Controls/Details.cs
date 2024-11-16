@@ -30,21 +30,16 @@ namespace cet16.Controls
 
             textBox1.Text = r.naziv;
             textBox2.Text = j.naziv;
-            dateTimePicker1.Value = r.napravljen;
-            comboBox1.DataSource = Enum.GetNames<Skracenica>();
-            comboBox1.Text = r.skracenica.ToString();
 
             textBox1.ReadOnly = true;
             textBox2.ReadOnly = true;
-            dateTimePicker1.Enabled = false;
-            comboBox1.Enabled = false;
 
             LoadGrid();
         }
 
         public void LoadGrid()
         {
-            dataGridView1.DataSource = new BindingList<prevod>(broker.GetprevodList(rid, jid));
+            dataGridView1.DataSource = broker.GetprevodList(rid, jid);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -62,8 +57,9 @@ namespace cet16.Controls
                 foreach (prevod row in prevods)
                 {
                     broker.Deleteprevod(row.id);
-                    LoadGrid();
                 }
+
+                LoadGrid();
             }
         }
     }

@@ -22,9 +22,6 @@ namespace cet16
             comboBox2.ValueMember = "id";
             comboBox2.SelectedIndex = -1;
 
-            comboBox3.DataSource = Enum.GetNames<Skracenica>();
-            comboBox3.SelectedIndex = -1;
-
             first = 1;
         }
 
@@ -55,14 +52,5 @@ namespace cet16
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            broker.Insertsrb_rec(new srb_rec
-            {
-                naziv = "test2", 
-                napravljen = dateTimePicker1.Value,
-                skracenica = Enum.Parse<Skracenica>((string)comboBox3.SelectedValue)
-            });
-        }
     }
 }

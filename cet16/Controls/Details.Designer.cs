@@ -34,10 +34,14 @@
             dataGridView1 = new DataGridView();
             prevodBindingSource = new BindingSource(components);
             button1 = new Button();
-            dateTimePicker1 = new DateTimePicker();
-            comboBox1 = new ComboBox();
+            prevodBindingSource1 = new BindingSource(components);
+            dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn4 = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)prevodBindingSource).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)prevodBindingSource1).BeginInit();
             SuspendLayout();
             // 
             // textBox1
@@ -60,7 +64,8 @@
             dataGridView1.AllowUserToDeleteRows = false;
             dataGridView1.AutoGenerateColumns = false;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.DataSource = prevodBindingSource;
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn1, dataGridViewTextBoxColumn2, dataGridViewTextBoxColumn3, dataGridViewTextBoxColumn4 });
+            dataGridView1.DataSource = prevodBindingSource1;
             dataGridView1.Location = new Point(12, 57);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.ReadOnly = true;
@@ -78,28 +83,43 @@
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
-            // dateTimePicker1
+            // prevodBindingSource1
             // 
-            dateTimePicker1.Location = new Point(279, 12);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(200, 23);
-            dateTimePicker1.TabIndex = 4;
+            prevodBindingSource1.DataSource = typeof(prevod);
             // 
-            // comboBox1
+            // dataGridViewTextBoxColumn1
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(496, 12);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(121, 23);
-            comboBox1.TabIndex = 5;
+            dataGridViewTextBoxColumn1.DataPropertyName = "id";
+            dataGridViewTextBoxColumn1.HeaderText = "id";
+            dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            dataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            dataGridViewTextBoxColumn2.DataPropertyName = "srb_recid";
+            dataGridViewTextBoxColumn2.HeaderText = "srb_recid";
+            dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            dataGridViewTextBoxColumn2.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            dataGridViewTextBoxColumn3.DataPropertyName = "jezikid";
+            dataGridViewTextBoxColumn3.HeaderText = "jezikid";
+            dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            dataGridViewTextBoxColumn3.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            dataGridViewTextBoxColumn4.DataPropertyName = "naziv";
+            dataGridViewTextBoxColumn4.HeaderText = "naziv";
+            dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            dataGridViewTextBoxColumn4.ReadOnly = true;
             // 
             // Details
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(comboBox1);
-            Controls.Add(dateTimePicker1);
             Controls.Add(button1);
             Controls.Add(dataGridView1);
             Controls.Add(textBox2);
@@ -108,6 +128,7 @@
             Text = "Details";
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ((System.ComponentModel.ISupportInitialize)prevodBindingSource).EndInit();
+            ((System.ComponentModel.ISupportInitialize)prevodBindingSource1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -123,7 +144,10 @@
         private DataGridViewTextBoxColumn jezikidDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn nazivDataGridViewTextBoxColumn;
         private BindingSource prevodBindingSource;
-        private DateTimePicker dateTimePicker1;
-        private ComboBox comboBox1;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private BindingSource prevodBindingSource1;
     }
 }
