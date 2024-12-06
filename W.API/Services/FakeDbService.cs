@@ -70,12 +70,12 @@ namespace W.API.Services
         {
             return new List<User>
             {
-                new User { Id = 1, Email = "john.doe@example.com", Points = 1200, TierCode = "GOLD", TierId = 1 },
-                new User { Id = 2, Email = "jane.smith@example.com", Points = 300, TierCode = "SILVER", TierId = 2 },
-                new User { Id = 3, Email = "mark.johnson@example.com", Points = 50, TierCode = "BRONZE", TierId = 3 },
-                new User { Id = 4, Email = "lucy.brown@example.com", Points = 2500, TierCode = "PLATINUM", TierId = 4 },
-                new User { Id = 5, Email = "michael.green@example.com", Points = 800, TierCode = "SILVER", TierId = 2 },
-                new User { Id = 6, Email = "susan.wilson@example.com", Points = 5000, TierCode = "DIAMOND", TierId = 5 },
+                new User { Id = 1, Email = "john.doe@example.com", Points = 1200 },
+                new User { Id = 2, Email = "jane.smith@example.com", Points = 300 },
+                new User { Id = 3, Email = "mark.johnson@example.com", Points = 50 },
+                new User { Id = 4, Email = "lucy.brown@example.com", Points = 2500 },
+                new User { Id = 5, Email = "michael.green@example.com", Points = 800 },
+                new User { Id = 6, Email = "susan.wilson@example.com", Points = 5000 },
             };
         }
 
@@ -90,7 +90,28 @@ namespace W.API.Services
 
         public List<ProductCategory> GetProductCategoryList()
         {
-            return new List<ProductCategory> { };
+            return new List<ProductCategory>
+            {
+                new ProductCategory { Name = "Bosch", Code = "B-H-2024" },
+                new ProductCategory { Name = "Makita", Code = "M-D-2024" },
+                new ProductCategory { Name = "DeWalt", Code = "D-S-2024" },
+                new ProductCategory { Name = "Stanley", Code = "S-H-2024" },
+                new ProductCategory { Name = "Bosch", Code = "B-G-2024" },
+                new ProductCategory { Name = "Milwaukee", Code = "M-I-2024" },
+                new ProductCategory { Name = "Black+Decker", Code = "B-J-2024" },
+                new ProductCategory { Name = "Hilti", Code = "H-L-2024" },
+                new ProductCategory { Name = "Ryobi", Code = "R-C-2024" },
+                new ProductCategory { Name = "TestNew", Code = "T-N-2024" },
+            };
         }
+
+        public List<Product> GetProductList()
+        {
+            return new List<Product> { };
+        }
+
+        public void SaveTier (Tier tier) { }
+
+        public void UpdateTier (Tier tier) { }
     }
 }
