@@ -165,7 +165,7 @@ namespace W.API.Controllers
             return _dbService.GetProductList()
                 .Select(x => new  ExternalProductDTO
                 {
-                    Name = x.Name,
+                    Title = x.Name,
                     ImageUrl = x.ImageUrl,
                     Description = x.Description,
                     Code = x.Code,
@@ -176,6 +176,53 @@ namespace W.API.Controllers
                 })
                 .Take(9)
                 .ToList();
+        }
+
+        [HttpGet]
+        public List<ExternalProductDTO> GetProducts()
+        {
+            List<ExternalProductDTO> products = new();
+
+            for (int i = 0; i < 70000; i++)
+            {
+                products.Add(new ExternalProductDTO
+                {
+                    Id = $"SKU {i}",
+                    Stock = i,
+                    Status = "Published",
+                    Visibility = "Public",
+                    Active = true,
+                    Title = $"Product {i}",
+                    CategoryImageUrl = $"CIU {i}",
+                    CategoryName = $"CN {i}",
+                    Code = $"Code {i}",
+                    Description = $"Desc {i}",
+                    ImageUrl = $"Image URL {i}",
+                    LinkToWebsite = $"LTW {i}",
+                    Price = i
+                });
+            }
+
+            return products;
+        }
+
+        [HttpGet]
+        public List<InteractionDTO> GetInteractions()
+        {
+            List<InteractionDTO> products = new();
+
+            for (int i = 0; i < 500_000; i++)
+            {
+                products.Add(new InteractionDTO
+                {
+                    ProductId = $"SKU {GetRandomNumber(80_000)}",
+                    UserId = $"Email {GetRandomNumber(10_000)}",
+                    Interaction = GetRandomInteraction(),
+                    Timestamp = GetRandomDateInTheLastYear()
+                });
+            }
+
+            return products;
         }
 
         #region Helpers
@@ -248,6 +295,34 @@ namespace W.API.Controllers
                     };
                 })
                 .ToList();
+        }
+
+        private long GetRandomNumber(int range)
+        {
+            return new Random().Next(range);
+        }
+
+        private string GetRandomInteraction()
+        {
+            string[] interactions = { "Bought", "PutInCart", "PutInFavorites", "Clicked" };
+            int index = new Random().Next(interactions.Length);
+            return interactions[index];
+        }
+
+        private string GetRandomDateInTheLastYear()
+        {
+            Random random = new Random();
+
+            int daysAgo = random.Next(0, 365);
+            int hours = random.Next(0, 24);
+            int minutes = random.Next(0, 60);
+            int seconds = random.Next(0, 60);
+
+            TimeSpan timeSpan = new TimeSpan(daysAgo, hours, minutes, seconds);
+
+            DateTime randomDate = DateTime.Now;
+
+            return randomDate.ToString("dd.MM.yyyy. HH:mm:ss");
         }
 
         #endregion
