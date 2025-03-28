@@ -30,9 +30,9 @@ namespace ConsoleApp1
                     //productsContent.Headers.ContentType = MediaTypeHeaderValue.Parse("text/csv");
                     //formData.Add(productsContent, "new_raw_products", Path.GetFileName(productsFilePath));
 
-                    //var response = await httpClient.PostAsync(@$"{apiUrl}/train_model", formData);
+                    //var response = await httpClient.PostAsync(@$"{apiUrl}/train_model3", formData);
 
-                    var response = await httpClient.GetAsync(@$"{apiUrl}/train_model2");
+                    var response = await httpClient.GetAsync(@$"{apiUrl}/train_model4");
                     string responseBody = await response.Content.ReadAsStringAsync();
                     response.EnsureSuccessStatusCode();
 

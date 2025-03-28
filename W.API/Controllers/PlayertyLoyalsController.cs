@@ -318,9 +318,9 @@ namespace W.API.Controllers
             int minutes = random.Next(0, 60);
             int seconds = random.Next(0, 60);
 
-            TimeSpan timeSpan = new TimeSpan(daysAgo, hours, minutes, seconds);
+            DateTime oneYearAgo = DateTime.Now.AddYears(-1);
 
-            DateTime randomDate = DateTime.Now;
+            DateTime randomDate = oneYearAgo.AddDays(daysAgo).AddHours(hours).AddMinutes(minutes).AddSeconds(seconds);
 
             return randomDate.ToString("dd.MM.yyyy. HH:mm:ss");
         }
