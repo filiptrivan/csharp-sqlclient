@@ -12,6 +12,8 @@ using BenchmarkDotNet.Exporters.Csv;
 using BenchmarkDotNet.Exporters;
 using BenchmarkDotNet.Diagnosers;
 using System.Diagnostics;
+using System.Security.Permissions;
+using System.Xml;
 
 namespace SpiderCascadeVsClientCascadeBenchmark
 {
@@ -34,86 +36,39 @@ namespace SpiderCascadeVsClientCascadeBenchmark
 
             await new BenchmarkProgram().ClientCascadeDelete();
         }
-
-        public static async Task InitDatabase()
-        {
-            IApplicationDbContext context = new SpiderApplicationDbContext();
-
-            await context.WithTransactionAsync(async () =>
-            {
-                People owner = new People
-                {
-                    Name = "Test Name",
-                    Description = "Test Description",
-                    Address = "Test Address",
-                    City = "Test City",
-                    Region = "Test Region",
-                    PostalCode = "Test PostalCode",
-                    Country = "Test Country",
-                    Phone = "Test Phone",
-                    Fax = "Test Fax",
-                    FaxNumber = "Test FaxNumber",
-                    PhoneNumber = "Test PhoneNumber",
-                    FaxName = "Test FaxName",
-                    FaxPhone = "Test FaxPhone",
-                    FaxPhoneNumber = "Test FaxPhoneNumber",
-                    Email = "Test Email",
-                    Index = "Test Index",
-                };
-                await context.DbSet<People>().AddAsync(owner);
-
-                for (int i = 0; i < 1000; i++)
-                {
-                    Blog blog = new Blog
-                    {
-                        Name = "Test Name",
-                        Description = "Test Description",
-                        Title = "Test Title",
-                        Author = "Test Author",
-                        Number = "Test Number",
-                        Code = "Test Code",
-                        Html = "Test Html",
-                        Slug = "Test Slug",
-                        MetaDescription = "Test MetaDescription",
-                        MetaTitle = "Test MetaTitle",
-                        MetaAuthor = "Test MetaAuthor",
-                        MetaCode = "Test MetaCode",
-                        MetaHtml = "Test MetaHtml",
-                        Owner = owner,
-                    };
-                    await context.DbSet<Blog>().AddAsync(blog);
-
-                    for (int j = 0; j < 10; j++)
-                    {
-                        Comment comment = new Comment
-                        {
-                            Name = "Test Name",
-                            Description = "Test Description",
-                            Created = DateTime.Now,
-                            Updated = DateTime.Now,
-                            Title = "Test Title",
-                            Author = "Test Author",
-                            Points = 10,
-                            Owner = owner,
-                            Blog = blog,
-                        };
-                        await context.DbSet<Comment>().AddAsync(comment);
-                    }
-                }
-
-                await context.SaveChangesAsync();
-            });
-        }
     }
 
+    [AllStatisticsColumn, MemoryDiagnoser]
     public class BenchmarkProgram
     {
-        IApplicationDbContext _context = new SpiderApplicationDbContext();
-        long ownerId = 24;
+        long ownerId;
 
+        [GlobalSetup]
+        public async void GlobalSetup()
+        {
+            IApplicationDbContext _context = new SpiderApplicationDbContext();
+
+            await _context.WithTransactionAsync(async () =>
+            {
+                await InitDatabase();
+            });
+        }
+
+        [IterationSetup]
+        public async void IterationSetup()
+        {
+            IApplicationDbContext _context = new SpiderApplicationDbContext();
+
+            await _context.WithTransactionAsync(async () =>
+            {
+                await InitDatabase();
+            });
+        }
+
+        [Benchmark]
         public async Task FilipTrivanDelete()
         {
-            Stopwatch stopwatch = Stopwatch.StartNew();
+            IApplicationDbContext _context = new SpiderApplicationDbContext();
 
             await _context.WithTransactionAsync(async () =>
             {
@@ -142,22 +97,17 @@ namespace SpiderCascadeVsClientCascadeBenchmark
 
                 await _context.DbSet<People>().Where(x => x.Id == ownerId).ExecuteDeleteAsync();
             });
-
-            stopwatch.Stop();
-            Console.WriteLine($"Took: {stopwatch.ElapsedMilliseconds} ms");
         }
 
+        [Benchmark]
         public async Task ClientCascadeDelete()
         {
-            Stopwatch stopwatch = Stopwatch.StartNew();
+            IApplicationDbContext _context = new SpiderApplicationDbContext();
 
             await _context.WithTransactionAsync(async () =>
             {
-                if (await _context.DbSet<People>().Where(e => e.Id == ownerId).AnyAsync() == false)
-                    return;
-
                 var owner = await _context.DbSet<People>()
-                    .Where(e => e.Id == ownerId)
+                    .Where(x => x.Id == ownerId)
                     .SingleAsync();
 
                 var blogs = await _context.DbSet<Blog>()
@@ -176,11 +126,79 @@ namespace SpiderCascadeVsClientCascadeBenchmark
 
                 await _context.SaveChangesAsync();
             });
-
-            stopwatch.Stop();
-            Console.WriteLine($"Took: {stopwatch.ElapsedMilliseconds} ms");
         }
 
+        public async Task InitDatabase()
+        {
+            IApplicationDbContext _context = new SpiderApplicationDbContext();
+
+            await _context.WithTransactionAsync(async () =>
+            {
+                People owner = new People
+                {
+                    Name = "Test Name",
+                    Description = "Test Description",
+                    Address = "Test Address",
+                    City = "Test City",
+                    Region = "Test Region",
+                    PostalCode = "Test PostalCode",
+                    Country = "Test Country",
+                    Phone = "Test Phone",
+                    Fax = "Test Fax",
+                    FaxNumber = "Test FaxNumber",
+                    PhoneNumber = "Test PhoneNumber",
+                    FaxName = "Test FaxName",
+                    FaxPhone = "Test FaxPhone",
+                    FaxPhoneNumber = "Test FaxPhoneNumber",
+                    Email = "Test Email",
+                    Index = "Test Index",
+                };
+                await _context.DbSet<People>().AddAsync(owner);
+
+                for (int i = 0; i < 1000; i++)
+                {
+                    Blog blog = new Blog
+                    {
+                        Name = "Test Name",
+                        Description = "Test Description",
+                        Title = "Test Title",
+                        Author = "Test Author",
+                        Number = "Test Number",
+                        Code = "Test Code",
+                        Html = "Test Html",
+                        Slug = "Test Slug",
+                        MetaDescription = "Test MetaDescription",
+                        MetaTitle = "Test MetaTitle",
+                        MetaAuthor = "Test MetaAuthor",
+                        MetaCode = "Test MetaCode",
+                        MetaHtml = "Test MetaHtml",
+                        Owner = owner,
+                    };
+                    await _context.DbSet<Blog>().AddAsync(blog);
+
+                    for (int j = 0; j < 10; j++)
+                    {
+                        Comment comment = new Comment
+                        {
+                            Name = "Test Name",
+                            Description = "Test Description",
+                            Created = DateTime.Now,
+                            Updated = DateTime.Now,
+                            Title = "Test Title",
+                            Author = "Test Author",
+                            Points = 10,
+                            Owner = owner,
+                            Blog = blog,
+                        };
+                        await _context.DbSet<Comment>().AddAsync(comment);
+                    }
+                }
+
+                await _context.SaveChangesAsync();
+
+                ownerId = owner.Id;
+            });
+        }
     }
 }
 
