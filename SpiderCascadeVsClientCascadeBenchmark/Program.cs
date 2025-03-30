@@ -21,8 +21,6 @@ namespace SpiderCascadeVsClientCascadeBenchmark
     {
         static async Task Main(string[] args)
         {
-            //await InitDatabase();
-
             //ConsoleLogger logger = new();
 
             //var config = new ManualConfig()
@@ -33,65 +31,56 @@ namespace SpiderCascadeVsClientCascadeBenchmark
 
             //Summary summary = BenchmarkRunner.Run<BenchmarkProgram>(config);
             //Console.WriteLine(summary);
-
-            await new BenchmarkProgram().ClientCascadeDelete();
+            BenchmarkRunner.Run<BenchmarkProgram>();
         }
     }
 
-    [AllStatisticsColumn, MemoryDiagnoser]
+    [AllStatisticsColumn]
+    [MemoryDiagnoser]
+    [HtmlExporter]
     public class BenchmarkProgram
     {
         long ownerId;
+        IApplicationDbContext _context = new SpiderApplicationDbContext();
 
         [GlobalSetup]
-        public async void GlobalSetup()
+        public void GlobalSetup()
         {
-            IApplicationDbContext _context = new SpiderApplicationDbContext();
-
-            await _context.WithTransactionAsync(async () =>
-            {
-                await InitDatabase();
-            });
+            Task.Run(async () => await InitDatabase()).GetAwaiter().GetResult();
         }
 
         [IterationSetup]
-        public async void IterationSetup()
+        public void IterationSetup()
         {
-            IApplicationDbContext _context = new SpiderApplicationDbContext();
-
-            await _context.WithTransactionAsync(async () =>
-            {
-                await InitDatabase();
-            });
+            Task.Run(async () => await InitDatabase()).GetAwaiter().GetResult();
         }
 
         [Benchmark]
         public async Task FilipTrivanDelete()
         {
-            IApplicationDbContext _context = new SpiderApplicationDbContext();
-
             await _context.WithTransactionAsync(async () =>
             {
-                if (await _context.DbSet<People>().Where(e => e.Id == ownerId).AnyAsync() == false)
-                    return;
-
                 List<long> listForDelete_1 = ownerId.StructToList();
 
                 var blogListForDeleteBecausePeople_2 = await _context.DbSet<Blog>()
+                    .AsNoTracking()
                     .Where(x => listForDelete_1.Contains(x.Owner.Id))
                     .Select(x => x.Id)
                     .ToListAsync();
 
                 var commentListForDeleteBecauseBlog_2 = await _context.DbSet<Comment>()
+                    .AsNoTracking()
                     .Where(x => blogListForDeleteBecausePeople_2.Contains(x.Blog.Id))
                     .Select(x => x.Id)
                     .ToListAsync();
 
                 await _context.DbSet<Comment>()
+                    .AsNoTracking()
                     .Where(x => commentListForDeleteBecauseBlog_2.Contains(x.Id))
                     .ExecuteDeleteAsync();
 
                 await _context.DbSet<Blog>()
+                    .AsNoTracking()
                     .Where(x => blogListForDeleteBecausePeople_2.Contains(x.Id))
                     .ExecuteDeleteAsync();
 
@@ -130,10 +119,20 @@ namespace SpiderCascadeVsClientCascadeBenchmark
 
         public async Task InitDatabase()
         {
-            IApplicationDbContext _context = new SpiderApplicationDbContext();
-
             await _context.WithTransactionAsync(async () =>
             {
+                await _context.DbSet<Comment>()
+                    .AsNoTracking()
+                    .ExecuteDeleteAsync();
+
+                await _context.DbSet<Blog>()
+                    .AsNoTracking()
+                    .ExecuteDeleteAsync();
+
+                await _context.DbSet<People>()
+                    .AsNoTracking()
+                    .ExecuteDeleteAsync();
+
                 People owner = new People
                 {
                     Name = "Test Name",
@@ -155,7 +154,7 @@ namespace SpiderCascadeVsClientCascadeBenchmark
                 };
                 await _context.DbSet<People>().AddAsync(owner);
 
-                for (int i = 0; i < 1000; i++)
+                for (int i = 0; i < 100; i++)
                 {
                     Blog blog = new Blog
                     {

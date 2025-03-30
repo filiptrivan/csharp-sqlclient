@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\SpiderFramework\spider-framework\Spider.Shared\Spider.Shared.csproj" />
+    <!-- <ProjectReference Include="..\..\..\SpiderFramework\spider-framework\Spider.Shared\Spider.Shared.csproj" /> -->
   </ItemGroup>
 
 </Project>
