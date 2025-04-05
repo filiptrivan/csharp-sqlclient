@@ -20,19 +20,19 @@ namespace ConsoleApp1
 
                 using (var formData = new MultipartFormDataContent())
                 {
-                    //var interactionsBytes = File.ReadAllBytes(interactionsFilePath);
-                    //var interactionsContent = new ByteArrayContent(interactionsBytes);
-                    //interactionsContent.Headers.ContentType = MediaTypeHeaderValue.Parse("text/csv");
-                    //formData.Add(interactionsContent, "new_raw_interactions", Path.GetFileName(interactionsFilePath));
+                    var interactionsBytes = File.ReadAllBytes(interactionsFilePath);
+                    var interactionsContent = new ByteArrayContent(interactionsBytes);
+                    interactionsContent.Headers.ContentType = MediaTypeHeaderValue.Parse("text/csv");
+                    formData.Add(interactionsContent, "new_raw_interactions", Path.GetFileName(interactionsFilePath));
 
-                    //var productsBytes = File.ReadAllBytes(productsFilePath);
-                    //var productsContent = new ByteArrayContent(productsBytes);
-                    //productsContent.Headers.ContentType = MediaTypeHeaderValue.Parse("text/csv");
-                    //formData.Add(productsContent, "new_raw_products", Path.GetFileName(productsFilePath));
+                    var productsBytes = File.ReadAllBytes(productsFilePath);
+                    var productsContent = new ByteArrayContent(productsBytes);
+                    productsContent.Headers.ContentType = MediaTypeHeaderValue.Parse("text/csv");
+                    formData.Add(productsContent, "new_raw_products", Path.GetFileName(productsFilePath));
 
-                    //var response = await httpClient.PostAsync(@$"{apiUrl}/train_model3", formData);
+                    var response = await httpClient.PostAsync(@$"{apiUrl}/train_model", formData);
 
-                    var response = await httpClient.GetAsync(@$"{apiUrl}/train_model4");
+                    //var response = await httpClient.GetAsync(@$"{apiUrl}/train_model4");
                     string responseBody = await response.Content.ReadAsStringAsync();
                     response.EnsureSuccessStatusCode();
 

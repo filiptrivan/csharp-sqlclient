@@ -4,16 +4,7 @@ using Spider.Shared.Interfaces;
 using SpiderCascadeVsClientCascadeBenchmark.Entities;
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Running;
-using BenchmarkDotNet.Configs;
-using BenchmarkDotNet.Loggers;
-using BenchmarkDotNet.Reports;
-using BenchmarkDotNet.Columns;
-using BenchmarkDotNet.Exporters.Csv;
-using BenchmarkDotNet.Exporters;
 using BenchmarkDotNet.Diagnosers;
-using System.Diagnostics;
-using System.Security.Permissions;
-using System.Xml;
 
 namespace SpiderCascadeVsClientCascadeBenchmark
 {
@@ -21,23 +12,12 @@ namespace SpiderCascadeVsClientCascadeBenchmark
     {
         static async Task Main(string[] args)
         {
-            //ConsoleLogger logger = new();
-
-            //var config = new ManualConfig()
-            //    .AddLogger(logger)
-            //    .AddDiagnoser(MemoryDiagnoser.Default)
-            //    .AddColumnProvider(DefaultColumnProviders.Instance)
-            //    .WithOptions(ConfigOptions.DisableOptimizationsValidator);
-
-            //Summary summary = BenchmarkRunner.Run<BenchmarkProgram>(config);
-            //Console.WriteLine(summary);
             BenchmarkRunner.Run<BenchmarkProgram>();
         }
     }
 
     [AllStatisticsColumn]
     [MemoryDiagnoser]
-    [HtmlExporter]
     public class BenchmarkProgram
     {
         long ownerId;
@@ -55,59 +35,61 @@ namespace SpiderCascadeVsClientCascadeBenchmark
             Task.Run(async () => await InitDatabase()).GetAwaiter().GetResult();
         }
 
+
         [Benchmark]
         public async Task FilipTrivanDelete()
         {
             await _context.WithTransactionAsync(async () =>
             {
-                List<long> listForDelete_1 = ownerId.StructToList();
+                // FT: Alway single element in the list here, but made this extension method for easier source generating whole method using recursion
+                List<long> ownerIdsForDelete = ownerId.StructToList();
 
-                var blogListForDeleteBecausePeople_2 = await _context.DbSet<Blog>()
+                // FT NOTE: As no tracking event if we are selecting only ids: https://learn.microsoft.com/en-us/ef/core/querying/tracking#tracking-and-custom-projections
+                List<long> blogIdsForDeleteBecauseOwner = await _context.DbSet<Blog>()
                     .AsNoTracking()
-                    .Where(x => listForDelete_1.Contains(x.Owner.Id))
+                    .Where(x => ownerIdsForDelete.Contains(x.Owner.Id))
                     .Select(x => x.Id)
                     .ToListAsync();
 
-                var commentListForDeleteBecauseBlog_2 = await _context.DbSet<Comment>()
+                List<long> commentIdsForDeleteBecauseBlogs = await _context.DbSet<Comment>()
                     .AsNoTracking()
-                    .Where(x => blogListForDeleteBecausePeople_2.Contains(x.Blog.Id))
+                    .Where(x => blogIdsForDeleteBecauseOwner.Contains(x.Blog.Id))
                     .Select(x => x.Id)
                     .ToListAsync();
 
                 await _context.DbSet<Comment>()
-                    .AsNoTracking()
-                    .Where(x => commentListForDeleteBecauseBlog_2.Contains(x.Id))
+                    .Where(x => commentIdsForDeleteBecauseBlogs.Contains(x.Id))
                     .ExecuteDeleteAsync();
 
                 await _context.DbSet<Blog>()
-                    .AsNoTracking()
-                    .Where(x => blogListForDeleteBecausePeople_2.Contains(x.Id))
+                    .Where(x => blogIdsForDeleteBecauseOwner.Contains(x.Id))
                     .ExecuteDeleteAsync();
 
-                await _context.DbSet<People>().Where(x => x.Id == ownerId).ExecuteDeleteAsync();
+                // FT: Operates directly at the database level without loading entities into the context, so tracking isn’t relevant
+                await _context.DbSet<People>()
+                    .Where(x => x.Id == ownerId)
+                    .ExecuteDeleteAsync();
             });
         }
 
         [Benchmark]
         public async Task ClientCascadeDelete()
         {
-            IApplicationDbContext _context = new SpiderApplicationDbContext();
-
             await _context.WithTransactionAsync(async () =>
             {
-                var owner = await _context.DbSet<People>()
+                People owner = await _context.DbSet<People>()
                     .Where(x => x.Id == ownerId)
                     .SingleAsync();
 
-                var blogs = await _context.DbSet<Blog>()
+                List<Blog> blogs = await _context.DbSet<Blog>()
                     .Where(e => e.Owner.Id == owner.Id)
                     .ToListAsync();
 
-                var blogIds = blogs
+                List<long> blogIds = blogs
                     .Select(x => x.Id)
                     .ToList();
 
-                var comments = await _context.DbSet<Comment>()
+                List<Comment> comments = await _context.DbSet<Comment>()
                     .Where(e => blogIds.Contains(e.Blog.Id))
                     .ToListAsync();
 
@@ -198,6 +180,7 @@ namespace SpiderCascadeVsClientCascadeBenchmark
                 ownerId = owner.Id;
             });
         }
+
     }
 }
 

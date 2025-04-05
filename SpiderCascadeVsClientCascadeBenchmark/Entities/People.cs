@@ -11,6 +11,10 @@ namespace SpiderCascadeVsClientCascadeBenchmark.Entities
     public class People
     {
         public long Id { get; set; }
+
+        [ConcurrencyCheck]
+        public int Version { get; set; }
+
         public string Name { get; set; }
         public string Description { get; set; }
         public string Address { get; set; }

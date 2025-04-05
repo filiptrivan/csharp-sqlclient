@@ -211,7 +211,7 @@ namespace W.API.Controllers
         {
             List<InteractionDTO> products = new();
 
-            for (int i = 0; i < 500_000; i++)
+            for (int i = 0; i < 100_000; i++)
             {
                 products.Add(new InteractionDTO
                 {
@@ -313,7 +313,7 @@ namespace W.API.Controllers
         {
             Random random = new Random();
 
-            int daysAgo = random.Next(0, 365);
+            int daysAgo = random.Next(0, 100);
             int hours = random.Next(0, 24);
             int minutes = random.Next(0, 60);
             int seconds = random.Next(0, 60);
