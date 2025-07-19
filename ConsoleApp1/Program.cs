@@ -9,8 +9,8 @@ namespace ConsoleApp1
     {
         static async Task Main(string[] args)
         {
-            string interactionsFilePath = @"C:\Users\user\Downloads\raw_interactions.csv";
-            string productsFilePath = @"C:\Users\user\Downloads\raw_products.csv";
+            //string interactionsFilePath = @"C:\Users\user\Downloads\raw_interactions.csv";
+            //string productsFilePath = @"C:\Users\user\Downloads\raw_products.csv";
             string apiUrl = @"http://127.0.0.1:5000";
             //string apiUrl = @"https://pa-recommender-fwa2hyepcqdrhre4.polandcentral-01.azurewebsites.net";
 
@@ -20,22 +20,22 @@ namespace ConsoleApp1
 
                 using (var formData = new MultipartFormDataContent())
                 {
-                    var interactionsBytes = File.ReadAllBytes(interactionsFilePath);
-                    var interactionsContent = new ByteArrayContent(interactionsBytes);
-                    interactionsContent.Headers.ContentType = MediaTypeHeaderValue.Parse("text/csv");
-                    formData.Add(interactionsContent, "new_raw_interactions", Path.GetFileName(interactionsFilePath));
+                    //var interactionsBytes = File.ReadAllBytes(interactionsFilePath);
+                    //var interactionsContent = new ByteArrayContent(interactionsBytes);
+                    //interactionsContent.Headers.ContentType = MediaTypeHeaderValue.Parse("text/csv");
+                    //formData.Add(interactionsContent, "new_raw_interactions", Path.GetFileName(interactionsFilePath));
 
-                    var productsBytes = File.ReadAllBytes(productsFilePath);
-                    var productsContent = new ByteArrayContent(productsBytes);
-                    productsContent.Headers.ContentType = MediaTypeHeaderValue.Parse("text/csv");
-                    formData.Add(productsContent, "new_raw_products", Path.GetFileName(productsFilePath));
+                    //var productsBytes = File.ReadAllBytes(productsFilePath);
+                    //var productsContent = new ByteArrayContent(productsBytes);
+                    //productsContent.Headers.ContentType = MediaTypeHeaderValue.Parse("text/csv");
+                    //formData.Add(productsContent, "new_raw_products", Path.GetFileName(productsFilePath));
 
-                    var response = await httpClient.PostAsync(@$"{apiUrl}/train_model", formData);
+                    //var response = await httpClient.PostAsync(@$"{apiUrl}/train_model", formData);
+                    var response = await httpClient.GetAsync(@$"{apiUrl}/train_homepage_model_by_http_request");
 
-                    //var response = await httpClient.GetAsync(@$"{apiUrl}/train_model4");
                     string responseBody = await response.Content.ReadAsStringAsync();
                     response.EnsureSuccessStatusCode();
-
+                    
                     var content = await response.Content.ReadAsStringAsync();
                 }
             }

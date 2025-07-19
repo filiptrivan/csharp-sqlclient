@@ -12,13 +12,13 @@ namespace SpiderCascadeVsClientCascadeBenchmark
     {
         static async Task Main(string[] args)
         {
-            BenchmarkRunner.Run<BenchmarkProgram>();
+            BenchmarkRunner.Run<BenchmarkClass>();
         }
     }
 
     [AllStatisticsColumn]
     [MemoryDiagnoser]
-    public class BenchmarkProgram
+    public class BenchmarkClass
     {
         long ownerId;
         IApplicationDbContext _context = new SpiderApplicationDbContext();
@@ -37,7 +37,7 @@ namespace SpiderCascadeVsClientCascadeBenchmark
 
 
         [Benchmark]
-        public async Task FilipTrivanDelete()
+        public async Task SpiderCascadeDelete()
         {
             await _context.WithTransactionAsync(async () =>
             {

@@ -1,0 +1,17 @@
+[
+  {
+    "Name": "New Profile",
+    "Projects": [
+      {
+        "Path": "02_07_2025_server\\02_07_2025_server.csproj",
+        "Action": "Start",
+        "DebugTarget": "02_07_2025_server"
+      },
+      {
+        "Path": "02_07_2025_client\\02_07_2025_client.csproj",
+        "Action": "Start",
+        "DebugTarget": "02_07_2025_client"
+      }
+    ]
+  }
+]
