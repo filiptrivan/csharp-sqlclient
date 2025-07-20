@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Net.Sockets;
+using System.Net;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
-using vesala_server;
 
-namespace vesala_client
+namespace vesala_server
 {
     public static class Helper
     {
@@ -27,10 +26,31 @@ namespace vesala_client
             byte[] buffer = new byte[3024];
             int received = client.Receive(buffer);
 
+            new Thread(() =>
+            {
+                Recieve(client);
+            }).Start();
+
             if (received != 0)
                 res = Encoding.UTF8.GetString(buffer, 0, received);
 
             return res;
+        }
+
+        public static void Recieve(Socket client)
+        {
+            while (true)
+            {
+                byte[] buffer = new byte[3024];
+                int received = client.Receive(buffer);
+
+                if (received != 0)
+                {
+                    string res = Encoding.UTF8.GetString(buffer, 0, received);
+                    MessageBox.Show(res);
+                    //Program.FormInstance
+                }
+            }
         }
     }
 }

@@ -156,7 +156,6 @@ namespace _24_11_2019
 
                 SqlCommand cmd = _connection.CreateCommand();
                 cmd.CommandText = $"select * from Subject where Id in ({string.Join(", ", ids)});";
-
                 SqlDataReader reader = cmd.ExecuteReader();
 
                 while (reader.Read())
