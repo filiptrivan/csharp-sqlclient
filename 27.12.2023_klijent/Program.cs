@@ -27,6 +27,15 @@ namespace _27._12._2023_klijent
             IPEndPoint ip = new IPEndPoint(IPAddress.Loopback, 8000);
             client.Connect(ip);
             Client = client;
+
+            byte[] buffer = new byte[3024];
+            int received = Client.Receive(buffer);
+
+            if (received != 0)
+            {
+                string serverResponse = Encoding.UTF8.GetString(buffer, 0, received);
+                MessageBox.Show(serverResponse);
+            }
         }
 
         public static string Request(string data)

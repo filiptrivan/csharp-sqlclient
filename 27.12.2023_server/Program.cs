@@ -8,6 +8,8 @@ namespace _27._12._2023_server
 {
     internal static class Program
     {
+        public static List<Cell> Cells { get; set; } = new List<Cell>();
+
         public static List<User> LogedInUsers = new List<User>();
 
         /// <summary>
@@ -39,6 +41,7 @@ namespace _27._12._2023_server
                 {
                     byte[] maxClients = UnicodeEncoding.UTF8.GetBytes("There is maximum number of clients connected.");
                     client.Send(maxClients);
+                    continue;
                 }
 
                 new Thread(() =>
@@ -59,7 +62,11 @@ namespace _27._12._2023_server
                             }
                             if (req.Method == "Odjava")
                             {
-                                client.Send(UnicodeEncoding.UTF8.GetBytes(Login(JsonSerializer.Deserialize<User>(req.Data))));
+                                client.Send(UnicodeEncoding.UTF8.GetBytes(Odjava(JsonSerializer.Deserialize<User>(req.Data))));
+                            }
+                            if (req.Method == "Pogodi")
+                            {
+                                client.Send(UnicodeEncoding.UTF8.GetBytes(Pogodi(JsonSerializer.Deserialize<Cell>(req.Data))));
                             }
                         }
                     }
@@ -88,6 +95,17 @@ namespace _27._12._2023_server
         {
             LogedInUsers.RemoveAll(x => x.username == odjava.username);
             return "Uspesno odjavljen.";
+        }
+
+        public static string Pogodi(Cell guess)
+        {
+            Cell cell = Cells.FirstOrDefault(x => x.Row == guess.Row && x.Column == guess.Column);
+            if (cell == null)
+            {
+                return "null";
+            }
+
+            return JsonSerializer.Serialize(cell);
         }
     }
 }
