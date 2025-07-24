@@ -24,7 +24,7 @@ namespace _27._12._2023_server
 
                 var r = command.ExecuteReader();
 
-                List<User> users = new List<User>();
+                List<User> users = new();
 
                 while (r.Read())
                 {
