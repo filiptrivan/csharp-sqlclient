@@ -1,4 +1,6 @@
-﻿namespace Dummy
+﻿using System.Security.Cryptography;
+
+namespace Dummy
 {
     internal class Program
     {
@@ -59,7 +61,29 @@
             //char c = b; // FALSE
 
             // 7
+            //var x = 1.2f; 
+            //dynamic y = 3.1m;
+            //x = 5.6f; // TRUE
+            //x = y; // TRUE
+            //x = '7'; // TRUE
+            //y = x; // TRUE
+            //x = (int)y; // TRUE
+            //y = "new Knjiga()"; // TRUE
 
+            // 8
+            //double x = 14.123123123F;
+            //dynamic y = 3.4m;
+            //x = 'a'; // TRUE
+            //x = y; // TRUE (but runtime error)
+            //y = x; // TRUE
+
+            // 9
+            //var x = 1;
+            //Gender g = x; // FALSE
+
+            // 10
+            //string x;
+            //x = x + ""; // FALSE
         }
     }
 
