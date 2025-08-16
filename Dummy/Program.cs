@@ -1,4 +1,5 @@
 ﻿using System.Security.Cryptography;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Dummy
 {
@@ -84,6 +85,123 @@ namespace Dummy
             // 10
             //string x;
             //x = x + ""; // FALSE
+
+            // 11
+            //int i = 0, j = 2, suma = 10;
+            //do
+            //{
+            //    suma--;
+            //    while (j < i + 2)
+            //    {
+            //        i++;
+            //        j++;
+            //    }
+            //    if (j % 2 == 0)
+            //        continue;
+            //    suma--;
+            //} while (i < 3);
+            //Console.WriteLine(--suma);
+
+            // 12
+            //Enumeracija e = new Enumeracija(); // 0 - Enumeration can be instantiated
+            ////e = e + 1; // This is valid, but e = 1 is invalid
+            //switch (++e)
+            //{
+            //    case Enumeracija.Prolece:
+            //        Console.WriteLine("Prolece");
+            //        break;
+            //    case Enumeracija.Leto:
+            //        Console.WriteLine("Leto");
+            //        break;
+            //    case Enumeracija.Jesen:
+            //        Console.WriteLine("Jesen");
+            //        break;
+            //    case Enumeracija.Zima:
+            //        Console.WriteLine("Zima");
+            //        break;
+            //}
+
+            // 13
+            //Operacija op = 0; int x = 10; int y = 2;
+            //if (x / y > 1) op++; else op--;
+            //switch (op)
+            //{
+            //    default: op += 1; // Don't have break
+            //    case Operacija.Plus: break;
+            //    case Operacija.Minus: op -= 2; // Don't have break
+            //    case Operacija.Puta:
+            //    case Operacija.Podeljeno: op -= 2; break;
+            //}
+            //Console.WriteLine(op);
+
+            // 14
+            //Enumeracija e = new Enumeracija(); // 0
+            //e = Enumeracija.Leto; // 3
+            //switch (++e) // 4
+            //{
+            //    case Enumeracija.Prolece:
+            //        e--;
+            //        break;
+            //    case Enumeracija.Leto:
+            //        e++;
+            //        break;
+            //    case Enumeracija.Jesen:
+            //    case Enumeracija.Zima:
+            //        e = e - 2; // 2
+            //        break;
+            //}
+            //Console.WriteLine(e); // Prolece is printting out, not 2
+
+            // 15
+            //Operacija op = 0; // You can just assign 0, for all other numbers you need to cast explicitly
+            //int x = 10;
+            //int y = 2;
+            //if (x / y > 1)
+            //    op++; // 1
+            //else op--;
+            //switch (op)
+            //{
+            //    default:
+            //        op += 1;
+            //        break;
+            //    case Operacija.Plus: break;
+            //    case Operacija.Minus:
+            //        op -= 2;
+            //        break;
+            //    case Operacija.Puta:
+            //    case Operacija.Podeljeno:
+            //        op -= 2;
+            //        break;
+            //}
+            //Console.WriteLine(op);
+
+            // 16
+            //Smer s = Smer.IS;
+            //switch (s)
+            //{
+            //    case Smer.MA:
+            //        Console.WriteLine("MA");
+            //        break;
+            //    case Smer.EE:
+            //        Console.WriteLine("EE");
+            //        break;
+            //    case Smer.JA:
+            //        Console.WriteLine("JA");
+            //        goto case Smer.EE;
+            //    case Smer.IS:
+            //        Console.WriteLine("IS");
+            //        goto case Smer.MA;
+            //}
+            //Console.WriteLine(s);
+
+            // 17
+            //void DodajDeset(ref int broj)
+            //{
+            //    broj += 10;
+            //}
+
+            //int x = 5;
+            //DodajDeset(x); // Can't pass variable without ref
         }
     }
 
@@ -92,4 +210,16 @@ namespace Dummy
         Male,
         Female
     }
+
+    public enum Enumeracija
+    {
+        Prolece = 2,
+        Leto, // 3
+        Jesen = 4,
+        Zima = 1
+    }
+
+    public enum Operacija { Kvadrat, Plus = 2, Puta, Minus = -1, Podeljeno = 4 } // Kvadrat = 0, Puta = 3
+
+    public enum Smer { JA = 2, IS = 1, MA = 3, EE = 4 };
 }
