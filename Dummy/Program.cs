@@ -1,5 +1,4 @@
 ﻿using System.Security.Cryptography;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Dummy
 {
@@ -202,6 +201,68 @@ namespace Dummy
 
             //int x = 5;
             //DodajDeset(x); // Can't pass variable without ref
+
+            // 18
+            //void Dodaj(out int x)
+            //{
+            //    //x++; // FALSE: Use of unassigned variable
+            //    x = 0;
+            //}
+
+            //int x = 6;
+            //Dodaj(out x);
+            //Console.WriteLine(x);
+
+            // 19
+            //static void m1(ref Klasa kRef) // NOTE: If it wasn't ref init of the class wouldn't change the value inside the Main
+            //{
+            //    kRef = new Klasa(100);
+            //}
+
+            //Klasa k1 = new Klasa(); // NOTE: If it was not initialized, it would throw exception
+            //m1(ref k1);
+            //Console.WriteLine("k1.vrednost = " + k1.vrednost);
+
+            // 20
+            //void Dodaj(in int x)
+            //{
+            //    //x = 0; // FALSE: With in, it's readonly
+            //}
+            ////void Dodaj(ref/in/out int x) { } // NOTE: You can't do this, if you add ref/in/out arguments are the same
+
+            //int x = 6;
+            //Dodaj(x); // NOTE: It works with and without in prefix
+            //Console.WriteLine(x);
+
+            // 21
+            //void m(ref int x) { }
+            //int x = 0;
+            //m(x); // FALSE: Only for in prefix it works with and without it
+
+            // 22
+            //void m(out int x)
+            //{
+            //    x = 5;
+            //    int y = x++; // NOTE: This will increase the out x also
+            //}
+
+            //int x;
+            //m(out x);
+            //Console.WriteLine(x);
+
+            // 23 - In the class, overload with ref works
+            //  public class Podatak
+            //  {
+            //    public int broj = 10;
+            //    public void M(int broj) { broj = this.broj; }
+            //    public void M(ref int broj) { broj = this.broj; }
+            //  }
+
+            // 24
+            //x = x++; // x = x++; leaves x unchanged
+            //y += x;
+
+            // 25
         }
     }
 
@@ -222,4 +283,21 @@ namespace Dummy
     public enum Operacija { Kvadrat, Plus = 2, Puta, Minus = -1, Podeljeno = 4 } // Kvadrat = 0, Puta = 3
 
     public enum Smer { JA = 2, IS = 1, MA = 3, EE = 4 };
+
+    class Klasa
+    {
+        public int vrednost;
+        public Klasa() { vrednost = 20; }
+        public Klasa(int a) { vrednost = a; }
+    }
+
+    public struct Struktura
+    {
+        public int x, y;
+        public Struktura(int x, int y)
+        {
+            this.x = x;
+            this.y = y;
+        }
+    }
 }
