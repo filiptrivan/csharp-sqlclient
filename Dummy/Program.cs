@@ -2,6 +2,7 @@
 
 namespace Dummy
 {
+
     internal class Program
     {
         static void Main(string[] args)
@@ -36,7 +37,7 @@ namespace Dummy
             //Console.WriteLine(d == (decimal)b);
 
             // 4
-            //double y = 1000001;
+            //double y = 1000002.2;
             //byte x = (byte)y;
             //Console.WriteLine(x);
 
@@ -85,22 +86,6 @@ namespace Dummy
             //string x;
             //x = x + ""; // FALSE
 
-            // 11
-            //int i = 0, j = 2, suma = 10;
-            //do
-            //{
-            //    suma--;
-            //    while (j < i + 2)
-            //    {
-            //        i++;
-            //        j++;
-            //    }
-            //    if (j % 2 == 0)
-            //        continue;
-            //    suma--;
-            //} while (i < 3);
-            //Console.WriteLine(--suma);
-
             // 12
             //Enumeracija e = new Enumeracija(); // 0 - Enumeration can be instantiated
             ////e = e + 1; // This is valid, but e = 1 is invalid
@@ -127,7 +112,7 @@ namespace Dummy
             //{
             //    default: op += 1; // Don't have break
             //    case Operacija.Plus: break;
-            //    case Operacija.Minus: op -= 2; // Don't have break
+            //    case Operacija.Minus: op -= 2;// Don't have break
             //    case Operacija.Puta:
             //    case Operacija.Podeljeno: op -= 2; break;
             //}
@@ -151,48 +136,6 @@ namespace Dummy
             //}
             //Console.WriteLine(e); // Prolece is printting out, not 2
 
-            // 15
-            //Operacija op = 0; // You can just assign 0, for all other numbers you need to cast explicitly
-            //int x = 10;
-            //int y = 2;
-            //if (x / y > 1)
-            //    op++; // 1
-            //else op--;
-            //switch (op)
-            //{
-            //    default:
-            //        op += 1;
-            //        break;
-            //    case Operacija.Plus: break;
-            //    case Operacija.Minus:
-            //        op -= 2;
-            //        break;
-            //    case Operacija.Puta:
-            //    case Operacija.Podeljeno:
-            //        op -= 2;
-            //        break;
-            //}
-            //Console.WriteLine(op);
-
-            // 16
-            //Smer s = Smer.IS;
-            //switch (s)
-            //{
-            //    case Smer.MA:
-            //        Console.WriteLine("MA");
-            //        break;
-            //    case Smer.EE:
-            //        Console.WriteLine("EE");
-            //        break;
-            //    case Smer.JA:
-            //        Console.WriteLine("JA");
-            //        goto case Smer.EE;
-            //    case Smer.IS:
-            //        Console.WriteLine("IS");
-            //        goto case Smer.MA;
-            //}
-            //Console.WriteLine(s);
-
             // 17
             //void DodajDeset(ref int broj)
             //{
@@ -214,9 +157,9 @@ namespace Dummy
             //Console.WriteLine(x);
 
             // 19
-            //static void m1(ref Klasa kRef) // NOTE: If it wasn't ref init of the class wouldn't change the value inside the Main
+            //void m1(ref Klasa kRef) // NOTE: If it wasn't ref init of the class wouldn't change the value inside the Main
             //{
-            //    kRef = new Klasa(100);
+            //    kRef = new Klasa(5);
             //}
 
             //Klasa k1 = new Klasa(); // NOTE: If it was not initialized, it would throw exception
@@ -228,16 +171,11 @@ namespace Dummy
             //{
             //    //x = 0; // FALSE: With in, it's readonly
             //}
-            ////void Dodaj(ref/in/out int x) { } // NOTE: You can't do this, if you add ref/in/out arguments are the same
+            ////void Dodaj(ref/in/out int x) { }
 
             //int x = 6;
             //Dodaj(x); // NOTE: It works with and without in prefix
             //Console.WriteLine(x);
-
-            // 21
-            //void m(ref int x) { }
-            //int x = 0;
-            //m(x); // FALSE: Only for in prefix it works with and without it
 
             // 22
             //void m(out int x)
@@ -263,41 +201,150 @@ namespace Dummy
             //y += x;
 
             // 25
+            //void m(ref int x) { }
+            //Klasa k = new Klasa(); 
+            //m(ref k.vrednost); // This will work because new Klasa() will instantiate vrednost to 0
+
+            // 26
+            //Klasa k1 = new Klasa();
+            //k1.vrednost = 5;
+            //Klasa k2 = k1;
+            //k2.vrednost = 6;
+            //k1.vrednost = 4; // However we change k1 or k2, both of them will change
+            //Console.WriteLine(k2.vrednost);
+            //Console.WriteLine(k1.vrednost);
+
+            // 27
+            //Struktura s1 = new Struktura();
+            //Struktura s2 = new Struktura();
+            //if (s1 == s2) // We can't compare structs
+            //    Console.WriteLine();
+
+            // 28
+            //int x += 5; // FALSE
+
+            // 29
+            //void M(int a, int b, int c) { }
+            //M(2, 1, c:2); // This is valid cuz c is in the proper position
+
+            // 30
+            //5.0.UO();
+
+            // 31
+            //int[] niz = { 1, 2, 3 };
+            //Console.WriteLine(niz[^0]); // index out of range exception
+
+            // 32
+            //if (true)
+            //{
+            //    int z = 0;
+            //}
+            //int z = 0;
+
+            //koja implementaciona metoda za prenos parametara se moze koristiti ukoliko je potrebno da metoda vrati informacije pozivaouce:
+            //pass-by-reference, out?
+
+            //koji od nav. prog. jezika omogucava da se prenese sadrzaj formalnog parametra u argument? C#, JAVA, C++, C
+
+
+            //33
+            //static void M(double x, params double[] y) { }
+            //static void M(double y = 5, double x = 10) { }
+            //M(x: 5.2);
+
+            // 34
+            //Enumeracija c = Enumeracija.Prolece;
+            //c = c + 4; // VALID operation
         }
-    }
 
-    public enum Gender
-    {
-        Male,
-        Female
-    }
-
-    public enum Enumeracija
-    {
-        Prolece = 2,
-        Leto, // 3
-        Jesen = 4,
-        Zima = 1
-    }
-
-    public enum Operacija { Kvadrat, Plus = 2, Puta, Minus = -1, Podeljeno = 4 } // Kvadrat = 0, Puta = 3
-
-    public enum Smer { JA = 2, IS = 1, MA = 3, EE = 4 };
-
-    class Klasa
-    {
-        public int vrednost;
-        public Klasa() { vrednost = 20; }
-        public Klasa(int a) { vrednost = a; }
-    }
-
-    public struct Struktura
-    {
-        public int x, y;
-        public Struktura(int x, int y)
+        public enum Gender
         {
-            this.x = x;
-            this.y = y;
+            Male,
+            Female
+        }
+
+        public enum Enumeracija
+        {
+            Prolece = 2,
+            Leto, // 3
+            Jesen = 4,
+            Zima = 1
+        }
+
+        public enum Operacija { Kvadrat, Plus = 2, Puta, Minus = -1, Podeljeno = 4 } // Kvadrat = 0, Puta = 3
+
+        public enum Smer { JA = 2, IS = 1, MA = 3, EE = 4 };
+
+        class Klasa
+        {
+            public int vrednost = 0;
+
+            public Klasa(int vrednost)
+            {
+                this.vrednost=vrednost;
+            }
+            public Klasa() { }
+
+            //public int B { set; } // You can't have set alone
+            //public string C { set { vrednost = int.Parse(value); } } // You can have set alone like this
+            //public int F(int x) => { return x; } // Invalid syntax
+
+            //public static void A1() { vrednost++; } // We can't access the `vrednost` from static method
+
+            // Overload examples:
+
+            // 63
+            //public void M(Klasa k, int i, int p = 0) { }
+            //public void M(out Klasa k, int i, int p = 0) { k = null; } // out CAN be at the whichever place inside method arguments
+            //void M(Klasa k, int i, out int p = 0) { p = 0; } // ref nor out can have default value
+
+            // 64
+            ////this can't be used inside static method
+
+            // 65
+            // You need to check for returned type also, void method can't return anything
+        }
+
+        public struct Struktura
+        {
+            public int x, y;
+            public static int z;
+            public Struktura(int x, int y)
+            {
+                this.x = x;
+                this.y = y;
+                //this.z = 5; // You can't use `this` if the field is static
+            }
+
+
+        }
+
+        public struct Index
+        {
+            public int broj;
+            public int godina;
+
+            public void A(int broj) { broj += this.broj; }
+            public void B(ref int broj) { broj += broj; }
+            public void C(int broj) { this.broj += this.broj; }
+            //public void D(out int broj) { this.broj += broj; } // `broj` isn't initialized
+            //public static void E(int broj) { this.broj += broj; } // this can't be used inside static method
+        }
+
+        public class Razlomak
+        {
+            public int brojilac;
+            public int imenilac;
+
+            public Razlomak(int brojilac, int imenilac)
+            {
+                this.brojilac = brojilac;
+                this.imenilac = imenilac;
+            }
         }
     }
+}
+public static class Extensions
+{
+    public static int UO(this double poena) => 0;
 }
