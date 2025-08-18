@@ -255,6 +255,65 @@ namespace Dummy
             // 34
             //Enumeracija c = Enumeracija.Prolece;
             //c = c + 4; // VALID operation
+
+            // 35
+            // sta od navedenog moze uticati na smanjenje pouzdanosti programa
+            // postojanje kljucnih reci koje nisu rezervisane
+            // implicitna konverzija promenljive
+            // koriscenje dinamickog dosega
+            // odsustvo podrske za korisnicki definisane tipove podataka
+            // neogranicavanje alijasa 
+            // odsustvo ortogonalnosti
+
+            // 36
+            // sta od navedenog moze imati negativan uticaj na efikasnost programa
+            // implicitno deklarisanje tipa promenljive koriscenjem konteksta
+            // koriscenje statickih promenljivih
+            // dinamicko povezivanje sa tipom
+            // pisanje programa u jeziku sa statickim dosegom
+            // dinamicka provera tipova
+            // dinamicko povezivanje sa memorijskom lokacijom
+
+            // 37
+            //string s1 = "xyz";
+            //string s2 = "zxy";
+            //s2 = s2 + 2; // VALID syntax
+            //s2 = s1;
+            //s2 = "yzx";
+            //// Even if string is considered as reference type it's behaving like value type, and the s1 stays "xyz" for the whole time
+
+            // 38
+            //int[] niz = { 1, 2, 3, 4, 5, 6, 7 };
+            //int[] noviNiz = niz[3..^5]; // Exception, invalid range
+
+            //foreach (var item in noviNiz)
+            //{
+            //    Console.WriteLine(item);
+            //}
+
+            // 39
+            //B b = new A();
+            //A a = new B();
+
+            // 40
+            //new B(1);
+
+            // 41
+            //char a = 'a';
+            //a = a + 1;
+            //string s = "a";
+            //s = s + 1;
+        }
+
+        public class A
+        {
+            public A() { Console.WriteLine("A"); }
+            public A(int i) { Console.WriteLine("AI"); }
+        }
+        public class B : A
+        {
+            public B() : base(1) { Console.WriteLine("B"); }
+            public B(int i) : this() { Console.WriteLine("BI"); }
         }
 
         public enum Gender
