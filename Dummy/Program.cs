@@ -303,17 +303,36 @@ namespace Dummy
             //a = a + 1;
             //string s = "a";
             //s = s + 1;
+
+            // 42
+            //(double)'#'.UO();
+
+            // 43
+            //A a = new B();
+            //a.M();
+            //A a2 = new A();
+            //a2.M();
         }
 
         public class A
         {
             public A() { Console.WriteLine("A"); }
             public A(int i) { Console.WriteLine("AI"); }
+
+            public virtual void M() 
+            {
+                Console.WriteLine("A");
+            }
         }
         public class B : A
         {
             public B() : base(1) { Console.WriteLine("B"); }
             public B(int i) : this() { Console.WriteLine("BI"); }
+
+            public override void M()
+            {
+                Console.WriteLine("B");
+            }
         }
 
         public enum Gender
