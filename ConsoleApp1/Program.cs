@@ -31,7 +31,7 @@ namespace ConsoleApp1
                     //formData.Add(productsContent, "new_raw_products", Path.GetFileName(productsFilePath));
 
                     //var response = await httpClient.PostAsync(@$"{apiUrl}/train_model", formData);
-                    var response = await httpClient.GetAsync(@$"{apiUrl}/train_homepage_model_by_http_request");
+                    var response = await httpClient.GetAsync(@$"{apiUrl}/train_homepage_and_similar_products_model_by_http_request");
 
                     string responseBody = await response.Content.ReadAsStringAsync();
                     response.EnsureSuccessStatusCode();

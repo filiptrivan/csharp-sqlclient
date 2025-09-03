@@ -7,42 +7,13 @@ namespace Dummy
     {
         static void Main(string[] args)
         {
-            // 1
-            // double is more precise than float and it can store it
-            //float x = 1;
-            //double a = x;
-
-            // 2
-            //float x = 1f; TRUE
-            //decimal x = 1; TRUE
-            //double x = 1d; TRUE
-            //int x = 1; TRUE
-            //byte x = 1; TRUE
-            //char x = 'a'; TRUE
-
-            //bool x = true; // FALSE
-            //string x = "123"; // FALSE
-            //DateTime x = DateTime.Now; FALSE
-
-            //long p = (long)x;
-
-            //short s = 32_767;
-            //short s = -32_768;
-            //ushort s = 65_535;
-
             // 3
-            //decimal d = 1.2M;
-            //Console.WriteLine(d == 1.2M);
-            //double b = (float)d;
-            //Console.WriteLine(d == (decimal)b);
-
-            // 4
-            //double y = 1000002.2;
-            //byte x = (byte)y;
-            //Console.WriteLine(x);
-
-            // 5
-            //int y = Gender.Male; // FALSE
+            //float f = 1.4f;
+            //decimal m = f;
+            //f = m;
+            //double d = 1.5;
+            //d = m;
+            //m = d;
 
             // 6
             //char a = 'a';
@@ -62,14 +33,12 @@ namespace Dummy
             //char c = b; // FALSE
 
             // 7
-            //var x = 1.2f; 
+            //var x = 1.2f;
             //dynamic y = 3.1m;
-            //x = 5.6f; // TRUE
             //x = y; // TRUE
             //x = '7'; // TRUE
             //y = x; // TRUE
             //x = (int)y; // TRUE
-            //y = "new Knjiga()"; // TRUE
 
             // 8
             //double x = 14.123123123F;
@@ -77,10 +46,6 @@ namespace Dummy
             //x = 'a'; // TRUE
             //x = y; // TRUE (but runtime error)
             //y = x; // TRUE
-
-            // 9
-            //var x = 1;
-            //Gender g = x; // FALSE
 
             // 10
             //string x;
@@ -117,33 +82,6 @@ namespace Dummy
             //    case Operacija.Podeljeno: op -= 2; break;
             //}
             //Console.WriteLine(op);
-
-            // 14
-            //Enumeracija e = new Enumeracija(); // 0
-            //e = Enumeracija.Leto; // 3
-            //switch (++e) // 4
-            //{
-            //    case Enumeracija.Prolece:
-            //        e--;
-            //        break;
-            //    case Enumeracija.Leto:
-            //        e++;
-            //        break;
-            //    case Enumeracija.Jesen:
-            //    case Enumeracija.Zima:
-            //        e = e - 2; // 2
-            //        break;
-            //}
-            //Console.WriteLine(e); // Prolece is printting out, not 2
-
-            // 17
-            //void DodajDeset(ref int broj)
-            //{
-            //    broj += 10;
-            //}
-
-            //int x = 5;
-            //DodajDeset(x); // Can't pass variable without ref
 
             // 18
             //void Dodaj(out int x)
@@ -205,15 +143,6 @@ namespace Dummy
             //Klasa k = new Klasa(); 
             //m(ref k.vrednost); // This will work because new Klasa() will instantiate vrednost to 0
 
-            // 26
-            //Klasa k1 = new Klasa();
-            //k1.vrednost = 5;
-            //Klasa k2 = k1;
-            //k2.vrednost = 6;
-            //k1.vrednost = 4; // However we change k1 or k2, both of them will change
-            //Console.WriteLine(k2.vrednost);
-            //Console.WriteLine(k1.vrednost);
-
             // 27
             //Struktura s1 = new Struktura();
             //Struktura s2 = new Struktura();
@@ -229,6 +158,7 @@ namespace Dummy
 
             // 30
             //5.0.UO();
+            //(double)5.UO(); // FALSE
 
             // 31
             //int[] niz = { 1, 2, 3 };
@@ -246,15 +176,10 @@ namespace Dummy
 
             //koji od nav. prog. jezika omogucava da se prenese sadrzaj formalnog parametra u argument? C#, JAVA, C++, C
 
-
             //33
             //static void M(double x, params double[] y) { }
             //static void M(double y = 5, double x = 10) { }
             //M(x: 5.2);
-
-            // 34
-            //Enumeracija c = Enumeracija.Prolece;
-            //c = c + 4; // VALID operation
 
             // 35
             // sta od navedenog moze uticati na smanjenje pouzdanosti programa
@@ -301,17 +226,122 @@ namespace Dummy
             // 41
             //char a = 'a';
             //a = a + 1;
-            //string s = "a";
-            //s = s + 1;
-
-            // 42
-            //(double)'#'.UO();
+            //a++;
 
             // 43
             //A a = new B();
             //a.M();
             //A a2 = new A();
             //a2.M();
+
+            // 44
+            //object y;
+            //string? y;
+            //char? y;
+            //int x = 5;
+            //y = x.ToString()?[0];
+
+            // 45
+            //var y = Enumeracija.Zima ?? 0;
+            //var y = "abc"?[0] ?? 1;
+
+            // 46
+            //char c = 'A';
+            //int x = 5;
+            //decimal m = c;
+            //m = x;
+
+            // 47
+            //byte e = 0;
+            //checked
+            //{
+            //    e--;
+            //}
+
+            // 48
+            //int? f1 = null; 
+            //int f2 = (int)f1; // Runtime error
+
+            // 49
+            //var f1 = 0; 
+            //dynamic f2 = "1"; 
+            //f2 = f1; // Obrati paznju da ovo moze, da je bilo f1 = f2, ne bi moglo
+
+            // 50
+            //int i = 0;
+            //Struktura s;
+            //i = s.x; // We get the error
+
+            // 51
+            //int i;
+            //i += 5;
+
+            // 52
+            //Struktura s;
+            //s.x += 5; 
+
+            // 53
+            //Klasa k = new Klasa();
+            //Console.WriteLine(k.enumeracija == 0);
+
+            // 54
+            //int a;
+            //int b;
+            //a = b;
+
+            // 55
+            //int x;
+            //Klasa k = new Klasa();
+            //x = k?.vrednostByte;
+
+            // 56
+            //int? a1 = null; 
+            //int a2 = 1; 
+            //int a = a1 ?? a2;
+
+            // 57
+            //float a = 5.2f;
+            //a++;
+            //Console.WriteLine(a);
+
+            // 58
+            //Klasa k = null; 
+            //Enumeracija? e2 = k?.enumeracija;
+            //Enumeracija? e3 = k.enumeracija;
+            //Enumeracija e4 = k?.enumeracija;
+            //Enumeracija e5 = k.enumeracija;
+
+            // 59
+            //int? f1 = null; 
+            //int f2 = (int)f1;
+
+            // 60
+            //Klasa e1 = null; 
+            //Enumeracija? e2 = e1?.enumeracija;
+            //Klasa f1 = new Klasa(); 
+            //object f2 = f1?.enumeracija;
+
+            // 61
+            //string s = (string)'#';
+
+            // 62
+            //char a = new Klasa().tekst[0];
+            //long? b = new Klasa().tekst[0] ?? 1;
+
+            // 63
+            //Klasa f1 = new Klasa(); 
+            //char? f2 = f1?.tekst[0];
+
+            // 64
+            //uint d = 0; d--;
+
+            // 65
+            //string f = "1";
+            //f += '#';
+
+            // 66
+            //var x = (int)new Klasa().enumeracija;
+
         }
 
         public class A
@@ -355,7 +385,10 @@ namespace Dummy
 
         class Klasa
         {
+            public byte vrednostByte;
             public int vrednost = 0;
+            public string tekst;
+            public Enumeracija? enumeracija;
 
             public Klasa(int vrednost)
             {
