@@ -1,4 +1,5 @@
-﻿using System.Security.Cryptography;
+﻿using System.Collections;
+using System.Security.Cryptography;
 
 namespace Dummy
 {
@@ -257,6 +258,7 @@ namespace Dummy
             //{
             //    e--;
             //}
+            //Console.WriteLine(e);
 
             // 48
             //int? f1 = null; 
@@ -305,7 +307,7 @@ namespace Dummy
             //Console.WriteLine(a);
 
             // 58
-            //Klasa k = null; 
+            //Klasa k = new Klasa();
             //Enumeracija? e2 = k?.enumeracija;
             //Enumeracija? e3 = k.enumeracija;
             //Enumeracija e4 = k?.enumeracija;
@@ -342,7 +344,150 @@ namespace Dummy
             // 66
             //var x = (int)new Klasa().enumeracija;
 
+            // 67
+            //Struktura s = new Struktura();
+            //s.x = 10;
+            //Klasa k = new Klasa();
+            //k.s = s;
+            //k.s.x = s.x;
+            //k.s.x = 11;
+            //Console.WriteLine(s.x);
+
+            // 68
+            //Enumeracija e = 0;
+            //e += 3;
+            //Console.WriteLine(e);
+
+            // 69
+            //var c1 = 5.3; 
+            //dynamic c2 = 1.7m; 
+            //c1 = c2;
+
+            // 70
+            //char c = new Klasa().tekst[0];
+            //Klasa f1 = new Klasa(); 
+            //char? f2 = f1?.tekst?[0];
+
+            // 71 - Works in C, C++, Java
+            //{
+            //    int x = 0;
+            //}
+            //int x = 0;
+
+            // 72
+            //Klasa[] niz1 = new Klasa[10];
+            //Console.WriteLine(niz1[0].vrednostByte);
+            //Struktura[] niz2 = new Struktura[10];
+            //Console.WriteLine(niz2[0].x);
+            //Enumeracija[] niz3 = new Enumeracija[10];
+            //Console.WriteLine(niz3[0]);
+            //Enumeracija?[] niz4 = new Enumeracija?[10];
+            //Console.WriteLine(niz3[0]);
+
+            // 73
+            //int[] niz1 = new int[10];
+            //int[] niz2 = new int { 1 };
+            //int[,] mat1 = new int[1][];
+            //int[,] mat2 = new int[,] { { 1, 2 } };
+            //int[,] mat3 = new int[1, 1] { { 1, 2 } };
+            //int[][] nn1 = { { 1, 2 } };
+            //int[][] nn2 = { };
+            //int[][] nn3 = new int[10][1] { 1, 2, 3 };
+
+            // 74
+            //ArrayList al = new ArrayList();
+            //al.Add(1);
+            //al.Add("2");
+            //Console.WriteLine(al[1]);
+
+            // 75
+            //string[] niz = new string[10];
+            //Console.WriteLine(niz[10]);
+
+            // 76
+            //string[] niz = new string[2] { "ABC" };
+            //string[] niz = new string[1] { "ABC" };
+            //Console.WriteLine(niz[0][0]);
+
+            // 77
+            //Enumeracija[][] niz = new Enumeracija[10][];
+            //Console.WriteLine(niz[0][0]);
+
+            // 78
+            //int[] niz = { 1, 2, 3, 4, 5};
+            //int[] niz2 = niz[2..^0];
+            //foreach (int item in niz2)
+            //    Console.WriteLine(item);
+
+            // 79
+            //Skup s = new Skup();
+            //Console.WriteLine(s[0]);
+
+            // 80
+            //int[] niz = { 1, 2 };
+            //Console.WriteLine(niz[-1]);
+
+            // 81
+            //Ugovor u = new Ugovor();
+            //Console.WriteLine(u.tip);
+
+            //Klasa k = new Klasa();
+            //Console.WriteLine(k.enumeracija);
+
+            // 82
+            //int x = 5;
+            //Enumeracija b = x + Enumeracija.Leto;
+            //int y = x + Enumeracija.Leto;
+
+            // 83
+            ////int z = 4 / 0;
+            //try
+            //{
+            //    try
+            //    {
+            //        int y = 0;
+            //        int x = 5 / y;
+            //    }
+            //    catch (NullReferenceException)
+            //    {
+            //        Console.WriteLine(1);
+            //    }
+            //    finally
+            //    {
+            //        Console.WriteLine(2);
+            //    }
+
+            //    Console.WriteLine(3);
+            //}
+            //catch (DivideByZeroException)
+            //{
+            //    Console.WriteLine(5);
+            //}
+            //catch (Exception)
+            //{
+            //    Console.WriteLine(4);
+            //}
+            ////catch (DivideByZeroException)
+            ////{
+            ////    Console.WriteLine(5);
+            ////}
+            //finally
+            //{
+            //    Console.WriteLine(6);
+            //}
+
+            // 84
+            //void M(int a, int b, int c) { }
+            //M(1, c: 2, b: 3);
+            //M(a: 1, 2, c: 3);
         }
+
+        public class Ugovor
+        {
+            public Tip tip;
+        }
+
+        public enum Tip { Biznis = 1, Privatni }
 
         public class A
         {
@@ -365,6 +510,15 @@ namespace Dummy
             }
         }
 
+        public class Skup
+        {
+            public int[] niz = { 2, 3, 4, 5, 6 };
+            public int this[int pozicija]
+            {
+                get { return niz[1-pozicija]; }
+            }
+        }
+
         public enum Gender
         {
             Male,
@@ -373,10 +527,10 @@ namespace Dummy
 
         public enum Enumeracija
         {
-            Prolece = 2,
+            Prolece = 1,
             Leto, // 3
-            Jesen = 4,
-            Zima = 1
+            Jesen = 2,
+            Zima
         }
 
         public enum Operacija { Kvadrat, Plus = 2, Puta, Minus = -1, Podeljeno = 4 } // Kvadrat = 0, Puta = 3
@@ -388,13 +542,18 @@ namespace Dummy
             public byte vrednostByte;
             public int vrednost = 0;
             public string tekst;
-            public Enumeracija? enumeracija;
+            public Enumeracija enumeracija;
+            public Struktura s;
 
             public Klasa(int vrednost)
             {
                 this.vrednost=vrednost;
             }
-            public Klasa() { }
+            public Klasa() 
+            {
+            }
+
+
 
             //public int B { set; } // You can't have set alone
             //public string C { set { vrednost = int.Parse(value); } } // You can have set alone like this
@@ -414,6 +573,25 @@ namespace Dummy
 
             // 65
             // You need to check for returned type also, void method can't return anything
+
+            // 66 !
+            //public int Property => vrednost = value;
+            //int Property { public get {  return vrednost; } }
+            //int Property { public get { return vrednost; } public set { } }
+            //public int Property { public get { return vrednost; } set { } }
+            //public int Property { internal get { return vrednost; } set { } }
+
+            // 67
+            //public int F(int x) => { x = x+5; return x; }
+
+            // 68
+            //public int M(int x) => x = 0;
+            //public void M(int x) => x = 0;
+
+            // 69
+            //public int M(ref int x) => x = 0;
+            //public void M(out int x) => x = 0;
+            //public int M(in int x) => 0;
         }
 
         public struct Struktura
