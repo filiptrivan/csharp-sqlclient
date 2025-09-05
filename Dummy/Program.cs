@@ -1,5 +1,7 @@
 ﻿using System.Collections;
+using System.Drawing;
 using System.Security.Cryptography;
+using static Dummy.Program;
 
 namespace Dummy
 {
@@ -480,6 +482,131 @@ namespace Dummy
             //void M(int a, int b, int c) { }
             //M(1, c: 2, b: 3);
             //M(a: 1, 2, c: 3);
+
+            // 70
+            //void M(Klasa k)
+            //{
+            //    k.vrednost = 10;
+            //    k = new Klasa();
+            //    k.vrednost = 15;
+            //}
+            //Klasa klasa = new Klasa();
+            //M(klasa);
+            //Console.WriteLine(klasa.vrednost);
+
+            // 71
+            //void M(ref Struktura s)
+            //{
+            //    s.x = 10;
+            //    s = new Struktura();
+            //    s.x = 15;
+            //}
+            //Struktura s = new Struktura();
+            //M(ref s);
+            //Console.WriteLine(s.x);
+
+            // 72
+            //void M(ref Klasa k)
+            //{
+            //    Console.WriteLine(--k.vrednost);
+            //}
+            //Klasa klasa = new Klasa();
+            //klasa.vrednost = 10;
+            //M(ref klasa);
+            //M(ref klasa);
+
+            // 73 !
+            //void M1(Pitanje a, ref Pitanje b)
+            //{
+            //    b = a;
+            //    a.resenje.tekst = "3";
+            //    a = b;
+            //    b.resenje.tekst = "4";
+            //}
+            //Pitanje a = new Pitanje(); Pitanje b = new Pitanje();
+            //a.resenje.tekst = "1"; b.resenje.tekst = "2";
+            //M1(a, ref b);
+            //Console.WriteLine(a.resenje.tekst + b.resenje.tekst);
+
+            // 74
+            //5.UO();
+            //5.0.UO();
+            //((int)5).UO();
+            //(double)'$'.UO();
+
+            // 75
+            //int[][] niz = new int[3][];
+            //Console.WriteLine(niz[0][0]);
+
+            // 76
+            //try
+            //{
+            //    try
+            //    {
+            //        Console.WriteLine(1);
+            //        throw new DivideByZeroException();
+            //    }
+            //    catch (ArgumentNullException)
+            //    {
+            //        Console.WriteLine(2);
+            //    }
+            //    finally
+            //    {
+            //        Console.WriteLine(6);
+            //    }
+
+            //    Console.WriteLine(3);
+            //}
+            //catch (ArgumentNullException)
+            //{
+            //    Console.WriteLine(4);
+            //}
+
+            // 77
+            //static void M(int a, int b, int c) { }
+            //M(a: 5, 4, c: 3);
+            //M(c: 5, b: 4, a: 3);
+
+            // 78
+            //static void M(params int[] a) { }
+            //M(a: 1, 2, 3);
+
+            // 79
+            //static void M<T> (Object a) where T : class
+            //{ 
+            //    a = "5"; 
+            //}
+            //Object a = "";
+            //M<object>(a);
+            //Console.WriteLine(a);
+
+        }
+
+        public struct Odgovor
+        {
+
+            public Oznaka? oznaka;
+            public string tekst;
+
+        }
+
+        public class Pitanje
+        {
+            public byte rb;
+            public string tekst;
+            public Tip tip;
+            public Poeni poeni;
+            public Odgovor resenje;
+
+        }
+
+        public enum Oznaka { A, B, C, D, E, F }
+
+        public struct Poeni
+        {
+            public int tacno;
+            public double netacno;
+
         }
 
         public class Ugovor
@@ -494,7 +621,7 @@ namespace Dummy
             public A() { Console.WriteLine("A"); }
             public A(int i) { Console.WriteLine("AI"); }
 
-            public virtual void M() 
+            public virtual void M()
             {
                 Console.WriteLine("A");
             }
@@ -549,7 +676,7 @@ namespace Dummy
             {
                 this.vrednost=vrednost;
             }
-            public Klasa() 
+            public Klasa()
             {
             }
 
@@ -592,6 +719,41 @@ namespace Dummy
             //public int M(ref int x) => x = 0;
             //public void M(out int x) => x = 0;
             //public int M(in int x) => 0;
+
+            // 70
+            //public static void M1() { M2(); }
+            //public void M2() { M1(); }
+            //public void M3() { M2(); }
+
+            // 71
+            //void M()
+            //{
+            //new Klasa2().staticka = 5;
+            //Klasa2.staticka = 5;
+            //}
+
+            // 72
+            //void M(int i) { }
+            //void M(out int i) { i = 0; }
+            //void M(ref int i) { }
+            //void M(in int i) { }
+
+            // 73
+            //static void M(in Klasa k) => k.vrednost = 5;
+            //static void M(in Struktura s) => s.x = 5;
+            //static void M(out Struktura s) => s.x = 4;
+
+            // 74
+            //byte a = -1;
+        }
+
+        public static class Klasa2
+        {
+            public static int staticka;
+
+            //void M() { this.staticka = 1; }
+            //static void M1() { }
+            //void M2() { this.M1(); }
         }
 
         public struct Struktura
@@ -636,4 +798,14 @@ namespace Dummy
 public static class Extensions
 {
     public static int UO(this double poena) => 0;
+}
+
+partial class Partial
+{
+    public virtual void M() { }
+}
+
+public partial class Partial
+{
+    public void M(int x) { }
 }
