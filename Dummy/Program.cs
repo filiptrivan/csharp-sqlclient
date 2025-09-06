@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Drawing;
+using System.Reflection;
 using System.Security.Cryptography;
 using static Dummy.Program;
 
@@ -21,6 +22,7 @@ namespace Dummy
             // 6
             //char a = 'a';
             //byte b = a; // FALSE
+            //byte b = (byte)a;
             //char c = b; // FALSE // Više jezički dizajn nego tehnička nužnost — tvorci jezika su hteli da izbegnu situacije gde se broj slučajno tretira kao znak bez namere programera.
 
             //char a = 'a';
@@ -32,7 +34,8 @@ namespace Dummy
             //char c = b; // FALSE
 
             //char a = 'a';
-            //short b = a; // FALSE
+            //short b = a; // FALSE 
+            //short b = (short)a;
             //char c = b; // FALSE
 
             // 7
@@ -53,6 +56,13 @@ namespace Dummy
             // 10
             //string x;
             //x = x + ""; // FALSE
+
+            // 11
+            //char x = '\';
+            //short a = (short)x;
+            //short a = (short)'3';
+            //short a = (byte)'3';
+            //byte a = (short)'3';
 
             // 12
             //Enumeracija e = new Enumeracija(); // 0 - Enumeration can be instantiated
@@ -97,15 +107,6 @@ namespace Dummy
             //Dodaj(out x);
             //Console.WriteLine(x);
 
-            // 19
-            //void m1(ref Klasa kRef) // NOTE: If it wasn't ref init of the class wouldn't change the value inside the Main
-            //{
-            //    kRef = new Klasa(5);
-            //}
-
-            //Klasa k1 = new Klasa(); // NOTE: If it was not initialized, it would throw exception
-            //m1(ref k1);
-            //Console.WriteLine("k1.vrednost = " + k1.vrednost);
 
             // 20
             //void Dodaj(in int x)
@@ -118,33 +119,10 @@ namespace Dummy
             //Dodaj(x); // NOTE: It works with and without in prefix
             //Console.WriteLine(x);
 
-            // 22
-            //void m(out int x)
-            //{
-            //    x = 5;
-            //    int y = x++; // NOTE: This will increase the out x also
-            //}
-
-            //int x;
-            //m(out x);
-            //Console.WriteLine(x);
-
-            // 23 - In the class, overload with ref works
-            //  public class Podatak
-            //  {
-            //    public int broj = 10;
-            //    public void M(int broj) { broj = this.broj; }
-            //    public void M(ref int broj) { broj = this.broj; }
-            //  }
-
             // 24
             //x = x++; // x = x++; leaves x unchanged
             //y += x;
 
-            // 25
-            //void m(ref int x) { }
-            //Klasa k = new Klasa(); 
-            //m(ref k.vrednost); // This will work because new Klasa() will instantiate vrednost to 0
 
             // 27
             //Struktura s1 = new Struktura();
@@ -175,7 +153,7 @@ namespace Dummy
             //int z = 0;
 
             //koja implementaciona metoda za prenos parametara se moze koristiti ukoliko je potrebno da metoda vrati informacije pozivaouce:
-            //pass-by-reference, out?
+            //pass-by-reference
 
             //koji od nav. prog. jezika omogucava da se prenese sadrzaj formalnog parametra u argument? C#, JAVA, C++, C
 
@@ -184,58 +162,19 @@ namespace Dummy
             //static void M(double y = 5, double x = 10) { }
             //M(x: 5.2);
 
-            // 35
-            // sta od navedenog moze uticati na smanjenje pouzdanosti programa
-            // postojanje kljucnih reci koje nisu rezervisane
-            // implicitna konverzija promenljive
-            // koriscenje dinamickog dosega
-            // odsustvo podrske za korisnicki definisane tipove podataka
-            // neogranicavanje alijasa 
-            // odsustvo ortogonalnosti
-
-            // 36
-            // sta od navedenog moze imati negativan uticaj na efikasnost programa
-            // implicitno deklarisanje tipa promenljive koriscenjem konteksta
-            // koriscenje statickih promenljivih
-            // dinamicko povezivanje sa tipom
-            // pisanje programa u jeziku sa statickim dosegom
-            // dinamicka provera tipova
-            // dinamicko povezivanje sa memorijskom lokacijom
-
             // 37
             //string s1 = "xyz";
             //string s2 = "zxy";
             //s2 = s2 + 2; // VALID syntax
-            //s2 = s1;
-            //s2 = "yzx";
-            //// Even if string is considered as reference type it's behaving like value type, and the s1 stays "xyz" for the whole time
 
             // 38
             //int[] niz = { 1, 2, 3, 4, 5, 6, 7 };
             //int[] noviNiz = niz[3..^5]; // Exception, invalid range
 
-            //foreach (var item in noviNiz)
-            //{
-            //    Console.WriteLine(item);
-            //}
-
-            // 39
-            //B b = new A();
-            //A a = new B();
-
-            // 40
-            //new B(1);
-
             // 41
             //char a = 'a';
             //a = a + 1;
             //a++;
-
-            // 43
-            //A a = new B();
-            //a.M();
-            //A a2 = new A();
-            //a2.M();
 
             // 44
             //object y;
@@ -245,7 +184,7 @@ namespace Dummy
             //y = x.ToString()?[0];
 
             // 45
-            //var y = Enumeracija.Zima ?? 0;
+            //var y = Enumeracija?.Zima ?? 0;
             //var y = "abc"?[0] ?? 1;
 
             // 46
@@ -276,17 +215,9 @@ namespace Dummy
             //Struktura s;
             //i = s.x; // We get the error
 
-            // 51
-            //int i;
-            //i += 5;
-
             // 52
             //Struktura s;
-            //s.x += 5; 
-
-            // 53
-            //Klasa k = new Klasa();
-            //Console.WriteLine(k.enumeracija == 0);
+            //s.x += 5;
 
             // 54
             //int a;
@@ -315,10 +246,6 @@ namespace Dummy
             //Enumeracija e4 = k?.enumeracija;
             //Enumeracija e5 = k.enumeracija;
 
-            // 59
-            //int? f1 = null; 
-            //int f2 = (int)f1;
-
             // 60
             //Klasa e1 = null; 
             //Enumeracija? e2 = e1?.enumeracija;
@@ -330,7 +257,7 @@ namespace Dummy
 
             // 62
             //char a = new Klasa().tekst[0];
-            //long? b = new Klasa().tekst[0] ?? 1;
+            //long? b = new Klasa()?.tekst[0] ?? 1;
 
             // 63
             //Klasa f1 = new Klasa(); 
@@ -396,12 +323,6 @@ namespace Dummy
             //int[][] nn2 = { };
             //int[][] nn3 = new int[10][1] { 1, 2, 3 };
 
-            // 74
-            //ArrayList al = new ArrayList();
-            //al.Add(1);
-            //al.Add("2");
-            //Console.WriteLine(al[1]);
-
             // 75
             //string[] niz = new string[10];
             //Console.WriteLine(niz[10]);
@@ -421,25 +342,13 @@ namespace Dummy
             //foreach (int item in niz2)
             //    Console.WriteLine(item);
 
-            // 79
-            //Skup s = new Skup();
-            //Console.WriteLine(s[0]);
-
             // 80
             //int[] niz = { 1, 2 };
             //Console.WriteLine(niz[-1]);
 
-            // 81
-            //Ugovor u = new Ugovor();
-            //Console.WriteLine(u.tip);
-
-            //Klasa k = new Klasa();
-            //Console.WriteLine(k.enumeracija);
-
             // 82
             //int x = 5;
-            //Enumeracija b = x + Enumeracija.Leto;
-            //int y = x + Enumeracija.Leto;
+            //int y = x + Enumeracija.Leto; // You can't do it to assign it to int, but you can to enum
 
             // 83
             ////int z = 4 / 0;
@@ -482,6 +391,7 @@ namespace Dummy
             //void M(int a, int b, int c) { }
             //M(1, c: 2, b: 3);
             //M(a: 1, 2, c: 3);
+            //M(c: 1, 2, a: 3);
 
             // 70
             //void M(Klasa k)
@@ -562,23 +472,73 @@ namespace Dummy
             //    Console.WriteLine(4);
             //}
 
-            // 77
-            //static void M(int a, int b, int c) { }
-            //M(a: 5, 4, c: 3);
-            //M(c: 5, b: 4, a: 3);
-
             // 78
             //static void M(params int[] a) { }
             //M(a: 1, 2, 3);
 
             // 79
-            //static void M<T> (Object a) where T : class
-            //{ 
-            //    a = "5"; 
+            //static void M<T>(Object a) where T : class
+            //{
+            //    a = "5";
             //}
             //Object a = "";
             //M<object>(a);
             //Console.WriteLine(a);
+
+            // 80
+            //Console.WriteLine(28%56);
+            //Console.WriteLine(0%1);
+
+            // 81
+            //Action[] a = new Action[2];
+            //for (int i = 1; i < 4; i = i*2)
+            //{
+            //    a[i/2]=() => Console.Write(i + 5);
+            //}
+            //foreach (var x in a) x();
+
+            // 82
+            //void M(int a = 5, params int[] y) { }
+            //void M(params int[] y, int a = 5) { }
+
+            // 83
+            //int? a = 0;
+            //Enumeracija e = (Enumeracija?)a ?? (Enumeracija)0;
+            //Enumeracija e = (Enumeracija?)a ?? 0;
+            //Enumeracija e = a ?? 0;
+            //Enumeracija e = a ?? (Enumeracija)0;
+            //Enumeracija e = 0;
+
+            // 84
+            //Klasa[] a = new Klasa[3]; Console.Write(a[0]);
+
+            // 85
+            //static (double, char) M5() => (5.0, '#'); var (e, _) = M5();
+
+            // 86
+            //Uspeh a = new Uspeh(); int c = 30; double d = 50.0;
+            //a += d;
+            //a += c; // u operatoru: Uspeh = Uspeh + double
+            //c += a;
+            //a.bodova = a + 5;
+
+            // 87
+            //Console.WriteLine((int)Oznaka.A);
+
+            // 89
+            //static void M(int x = 0, int y = 0, int z = 0) { }
+            //M(x: 1, 2, z: 2);
+            //M(z: 1, 2, x: 2);
+
+            // 90
+            //public void M()
+            //{
+            //X f1 = new X(); Z f2 = (Z)f1; f2.x = 5;
+            //X f3 = new Z(); Z f4 = (Z)f3; f4.x = 5;
+            //}
+
+            // 91
+            //Console.WriteLine(1/0.0);
 
         }
 
@@ -797,6 +757,13 @@ namespace Dummy
 }
 public static class Extensions
 {
+    public static void M()
+    {
+        //1.2.UO();
+        //Extensions.UO(1.2);
+        //(double)('#').UO();
+    }
+
     public static int UO(this double poena) => 0;
 }
 
@@ -808,4 +775,81 @@ partial class Partial
 public partial class Partial
 {
     public void M(int x) { }
+}
+
+public struct Uspeh
+{
+    public int bodova;
+
+    public static Uspeh operator +(Uspeh u, double b)
+    {
+        u.bodova += (int)(b);
+        return u;
+    }
+
+    public static int operator +(Uspeh u, int b)
+    {
+        u.bodova += b;
+        return u.bodova;
+    }
+
+}
+public struct Modul { }
+public class Student
+{
+    //public Uspeh uspeh;
+    //public static Uspeh uspeh;
+
+    // 1
+    //static void A(out int u) => u = uspeh.bodova;
+    //static void B(out Uspeh u) => u = new Uspeh();
+    //void C(out Student s) => s.uspeh.bodova =10;
+    //void D(in Uspeh u) => u.bodova = 10;
+    //void E(in Student s) => s = new Student();
+    //void F(in Student s) => s.uspeh.bodova = 10;
+
+    // 2
+    //static void A(out int u) => u = this.uspeh.bodova;
+    //static void A(out int u) => u = uspeh.bodova;
+    //void A(out int u) => u = this.uspeh.bodova;
+    //void A(out int u) => u = uspeh.bodova;
+    //void D(in Uspeh u) => u.bodova = 10;
+    //int M(Modul m, ref int i, short s = 0) => 0;
+
+    // 3
+    //int M(Modul m, out int i, short s, int d = 5) => 0;
+    //short M(Modul m, ref int i, short s = 0) => 0;
+    //int M(Modul m, int i, short s = 0) => 0;
+    //static int M(Godina m, ref int i, short s) => 0;
+    //public int M(Modul t, short s, ref int i) => 0;
+    //int M(Modul m, in int i, short s = 0) => i = 5;
+}
+
+
+// 1
+//interface I { void Metoda(); }
+//abstract class A { public abstract int M { get; } }
+//abstract class B : A, I { public void Metoda() { } }
+//class C : B { public override int M => 1; }
+//sealed class D { public int d; }
+//class E : D { public int e; }
+//partial class F : A { public int M => 1; }
+
+// 2
+class X { public int x; }
+class Y : X { }
+class Z : Y { }
+
+class C
+{
+
+}
+
+// 3 - In the class, overload with ref works
+public class Podatak
+{
+    public int broj = 10;
+    //public void M(int broj) { broj = this.broj; }
+    //public void M(in int broj) {  }
+    //public void M(ref int broj) { }
 }
