@@ -540,6 +540,30 @@ namespace Dummy
             // 91
             //Console.WriteLine(1/0.0);
 
+            //object niz = new int[] { 1, 2, 3};
+
+            //if (niz is [== 1, <= 2, >2 and <4])
+            //    niz[0]++;
+
+            //Console.WriteLine(niz[0]);
+
+            //int[] niz = { 1, 2, 3 };
+
+            //if (niz is [1, <= 2, > 2 and < 4])
+            //{
+            //    niz[0]++;
+            //}
+
+            //Console.WriteLine(niz[0]);
+
+            //B a = new C();
+            //a.M();
+            //a.M2();
+            //B b = a;
+            //b.M();
+            //b.M2();
+
+
         }
 
         public struct Odgovor
@@ -575,27 +599,6 @@ namespace Dummy
         }
 
         public enum Tip { Biznis = 1, Privatni }
-
-        public class A
-        {
-            public A() { Console.WriteLine("A"); }
-            public A(int i) { Console.WriteLine("AI"); }
-
-            public virtual void M()
-            {
-                Console.WriteLine("A");
-            }
-        }
-        public class B : A
-        {
-            public B() : base(1) { Console.WriteLine("B"); }
-            public B(int i) : this() { Console.WriteLine("BI"); }
-
-            public override void M()
-            {
-                Console.WriteLine("B");
-            }
-        }
 
         public class Skup
         {
@@ -852,4 +855,38 @@ public class Podatak
     //public void M(int broj) { broj = this.broj; }
     //public void M(in int broj) {  }
     //public void M(ref int broj) { }
+}
+
+public class A
+{
+    //public A() { Console.WriteLine("A"); }
+    //public A(int i) { Console.WriteLine("AI"); }
+    protected int broj;
+
+    public virtual void M()
+    {
+        Console.WriteLine("A");
+        broj = 1;
+    }
+
+    public void M2()
+    {
+        Console.WriteLine("A2");
+    }
+}
+public class B : A
+{
+    //public B() : base(1) { Console.WriteLine("B"); }
+    //public B(int i) : this() { Console.WriteLine("BI"); }
+
+    public override void M()
+    {
+        Console.WriteLine("B");
+        broj = 10;
+    }
+
+    public new void M2()
+    {
+        Console.WriteLine("B2");
+    }
 }
